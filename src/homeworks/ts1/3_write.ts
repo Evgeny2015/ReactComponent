@@ -192,7 +192,7 @@ const productList: Product[] = [
  * Принимает дату создания (строка)
  * */
 export const createRandomProduct = (createdAt: string): Product => {
-    const product = productList[Math.floor(Math.random()*10)]
+    const product = productList[Math.floor(Math.random()*productList.length)]
 
     return {
         id: crypto.randomUUID(),
