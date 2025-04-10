@@ -1,17 +1,47 @@
-import React from 'react';
+import React, { FC, useContext } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import cn from 'clsx';
+import ThemeToggle, { ThemeContext, ThemeProvider } from 'src/shared/theme-toggle/theme-toggle';
+import LanguageToggle, { LanguageProvider } from 'src/shared/lang-toggle/lang-toggle';
+import 'src/i18n/config';
+import { useTranslation } from 'react-i18next';
 
-function App() {
+
+const HeadTitle: FC = () => {
+      const { t } = useTranslation();
+      return (
+          <div>
+              <p>{t('title')}</p>
+          </div>
+      )
+}
+
+const AppForm: FC = () => {
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className={cn('App', theme + '-theme')}>
+      <header className={cn('App-header', theme + '-theme')}>
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Текст писать тут
-        </p>
+        <HeadTitle/>
+        <div className='tools'>
+          <ThemeToggle />
+          <LanguageToggle/>
+        </div>
       </header>
     </div>
+  );
+}
+
+
+const App: FC = () => {
+  return (
+    <ThemeProvider>
+      <LanguageProvider>
+        <AppForm />
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }
 
