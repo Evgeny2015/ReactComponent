@@ -11,11 +11,9 @@ export interface LayoutProps {
 /**
  * Layout component
  */
-const Layout: FC<LayoutProps> = ({ ...props }) => {
+const Layout: FC<LayoutProps> = () => {
   return (
-    <div className={cn('layout')}
-    {...props}
-    >
+    <div className={cn('layout')}>
         <Header />
         <div className={cn('content')}>
           <div className={cn('content', 'left-side')}></div>

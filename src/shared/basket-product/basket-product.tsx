@@ -11,10 +11,9 @@ export interface BasketProductProps {
 /**
  * Компонент отображения товара для корзины
  */
-const ShortProduct: FC<BasketProductProps> = ({ price, image, name, ...props }) => {
+const ShortProduct: FC<BasketProductProps> = ({ price, image, name }) => {
   return (
     <div className={cn('basket-product')}
-        {...props}
     >
         <div className={cn('image')}>
             <img src={image} alt="image" />

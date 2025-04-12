@@ -11,11 +11,9 @@ export interface HeaderProps {
 /**
  * Header component
  */
-const Header: FC<HeaderProps> = ({ ...props }) => {
+const Header: FC<HeaderProps> = () => {
   return (
-    <header className={cn('header')}
-    {...props}
-    >
+    <header className={cn('header')}>
       <div>
         <Logo size={25} />
       </div>

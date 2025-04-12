@@ -11,11 +11,9 @@ export interface ModalWindowProps {
 /**
  * Modal Window component
  */
-const ModalWindow: FC<ModalWindowProps> = ({ visible, children, ...props }) => {
+const ModalWindow: FC<ModalWindowProps> = ({ visible, children }) => {
   return (
-    <div className={cn('modalwindow-background', {'window-hidden': !visible})}
-        {...props}
-        >
+    <div className={cn('modalwindow-background', {'window-hidden': !visible})}>
         <div className={cn('modalwindow-container')}>
             <div className={cn('body')}>
                     {children}

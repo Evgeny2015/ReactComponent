@@ -13,11 +13,9 @@ export interface EditOperationProps {
 /**
  * Компонент полного отображения операции и редиктирования
  */
-const EditOperation: FC<EditOperationProps> = ({ sum, category, name, description, date, ...props }) => {
+const EditOperation: FC<EditOperationProps> = ({ sum, category, name, description, date }) => {
   return (
-    <div className={cn('edit-operation')}
-        {...props}
-    >
+    <div className={cn('edit-operation')}>
         <div className={cn('short-string', 'category')}>{category}</div>
         <div className={cn('edit-header')}>
             <div className={cn('edit-container', 'sum')}>{sum}</div>
