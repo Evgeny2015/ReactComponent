@@ -13,11 +13,9 @@ export interface ShortOperationProps {
 /**
  * Компонент краткого отображения операции
  */
-const ShortOperation: FC<ShortOperationProps> = ({ sum, category, name, description, ...props }) => {
+const ShortOperation: FC<ShortOperationProps> = ({ sum, category, name, description }) => {
   return (
-    <div className={cn('short-operation')}
-        {...props}
-    >
+    <div className={cn('short-operation')}>
         <div className={cn('short-container')}>
             <div className={cn('short-container', 'short-string', 'category')}>{category}</div>
             <div className={cn('short-container', 'sum')}>{sum}</div>

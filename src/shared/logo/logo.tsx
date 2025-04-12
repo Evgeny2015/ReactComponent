@@ -9,7 +9,7 @@ export interface LogoProps {
 /**
  * Logo component
  */
-const Logo: FC<LogoProps> = ({ size, ...props }) => {
+const Logo: FC<LogoProps> = ({ size }) => {
 
   useEffect(() => {
     const root = document.documentElement;
@@ -17,9 +17,7 @@ const Logo: FC<LogoProps> = ({ size, ...props }) => {
   });
 
   return (
-    <div className={cn('wrapper')}
-      {...props}
-    >
+    <div className={cn('wrapper')}>
         <div className={cn("circle")}>
             <span id="text">A</span>
         </div>

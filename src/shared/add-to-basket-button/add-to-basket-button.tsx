@@ -12,19 +12,21 @@ export interface AddToBasketButtonProps {
  * если счетчик равен нулю, это кнопка, если больше нуля,
  * то это инпут с отображением количества товара и двумя кнопками по краям (увеличения/уменьшения).
  */
-const AddToBasketButton: FC<AddToBasketButtonProps> = ({ count, ...props }) => {
+const AddToBasketButton: FC<AddToBasketButtonProps> = ({ count }) => {
   return (
-    <div className={cn('button-container')}
-        {...props}
-    >
-        <button
-            type='button'
-            className={cn('button-container', 'button', {'invisible': count != 0 })}
-            >
-                Добавить
-        </button>
+    <div className={cn('button-container')}>
 
-        <div className={cn('button-container', {'invisible': count == 0 })}>
+        {!count &&
+            <button
+                type='button'
+                className={cn('button-container', 'button')}
+                >
+                    Добавить
+            </button>
+        }
+
+        { !!count &&
+        <div className={cn('button-container')}>
             <button
                 type="button"
                 className={cn('button-up')}
@@ -40,6 +42,7 @@ const AddToBasketButton: FC<AddToBasketButtonProps> = ({ count, ...props }) => {
                 className={cn('button-down')}
             >&gt;&gt;</button>
         </div>
+        }
     </div>
   );
 };
