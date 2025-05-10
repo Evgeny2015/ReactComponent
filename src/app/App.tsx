@@ -24,6 +24,7 @@ const AppForm: FC = () => {
     <div className={cn('App', theme + '-theme')}>
       <header className={cn('App-header', theme + '-theme')}>
         <img src={logo} className="App-logo" alt="logo" />
+
         <HeadTitle/>
         <div className='tools'>
           <ThemeToggle />
@@ -33,7 +34,6 @@ const AppForm: FC = () => {
     </div>
   );
 }
-
 
 const App: FC = () => {
   return (
