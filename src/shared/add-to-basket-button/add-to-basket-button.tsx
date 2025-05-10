@@ -4,6 +4,7 @@ import './add-to-basket-button.css';
 
 export interface AddToBasketButtonProps {
     count: number;          // счетчик
+    children: React.ReactNode;
 };
 
 /**
