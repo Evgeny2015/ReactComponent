@@ -1,6 +1,7 @@
 .short-operation {
     display: flex;
     flex-direction: column;
+    height: 90px;
     width: 120px;
     border: 1px solid rgb(207, 202, 202);
     border-radius: 3px;
