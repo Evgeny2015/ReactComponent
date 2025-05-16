@@ -13,11 +13,9 @@ export interface ShortProductProps {
 /**
  * Компонент краткого отображения товара
  */
-const ShortProduct: FC<ShortProductProps> = ({ price, image, name, description, ...props }) => {
+const ShortProduct: FC<ShortProductProps> = ({ price, image, name, description }) => {
   return (
-    <div className={cn('short-product')}
-        {...props}
-    >
+    <div className={cn('short-product')}>
         <div className={cn('image')}>
             <img src={image} alt="image" />
         </div>

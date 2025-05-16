@@ -13,6 +13,11 @@ export interface AddToBasketButtonProps {
  * то это инпут с отображением количества товара и двумя кнопками по краям (увеличения/уменьшения).
  */
 const AddToBasketButton: FC<AddToBasketButtonProps> = ({ count }) => {
+
+    const onChangeHandler = () => {
+
+    }
+
   return (
     <div className={cn('button-container')}>
 
@@ -33,6 +38,7 @@ const AddToBasketButton: FC<AddToBasketButtonProps> = ({ count }) => {
                 inputMode="numeric"
                 className={cn('button-container', 'input')}
                 value={count}
+                onChange={onChangeHandler}
                 />
             <button
                 type="button"
