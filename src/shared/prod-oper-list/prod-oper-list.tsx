@@ -29,7 +29,6 @@ type ProdOperListProps = IOperationList | IProductList
 const ProdOperList: FC<ProdOperListProps> = ({ type, data }) => {
     return (
         <>
-        {/* <div className={cn('button-container')}> */}
             { type === 'operation' &&
                 data.map(x => (
                     <ShortOperation
@@ -53,7 +52,6 @@ const ProdOperList: FC<ProdOperListProps> = ({ type, data }) => {
                     />
                 ))
             }
-        {/* </div> */}
         </>
     );
 };
