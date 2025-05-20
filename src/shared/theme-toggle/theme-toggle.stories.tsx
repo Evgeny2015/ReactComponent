@@ -1,6 +1,7 @@
-import { Meta, StoryObj } from '@storybook/react';
-import ThemeToggle, { ThemeProvider } from './theme-toggle';
 import React from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+import { ThemeProvider } from '../theme-provider/theme-provider';
+import ThemeToggle from './theme-toggle';
 
 const meta: Meta<typeof ThemeToggle> = {
     title: 'Components/ThemeToggle',
