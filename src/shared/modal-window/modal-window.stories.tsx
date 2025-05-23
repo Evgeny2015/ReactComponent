@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import ModalWindow, { ModalWindowProps } from './modal-window';
-import React from 'react';
+import { useArgs } from '@storybook/preview-api';
+import React, { useEffect } from 'react';
 
 const meta: Meta<typeof ModalWindow> = {
     title: 'Components/ModalWindow',
@@ -13,9 +14,25 @@ const meta: Meta<typeof ModalWindow> = {
 export default meta;
 
 export const Main: StoryObj<typeof ModalWindow> = {
-    render: (args: ModalWindowProps) => <ModalWindow {...args} />,
+    render: (args: ModalWindowProps) => {
+        const [, updateArgs] = useArgs()
+        const handleSwitchDialog = (visible: boolean) => {
+            updateArgs({ ...args, visible })
+        }
+        useEffect(() => {
+            updateArgs({ ...args, onClose: () => handleSwitchDialog(false) })
+        }, [])
+
+        return (
+            <>
+                <button type='button' onClick={() => handleSwitchDialog(true)}>Открыть</button>
+                <button type='button' onClick={() => handleSwitchDialog(false)}>Закрыть</button>
+                <ModalWindow {...args} />
+            </>
+        )
+    },
     args: {
-        visible: true,
+        visible: false,
         children: ""
     }
 };
