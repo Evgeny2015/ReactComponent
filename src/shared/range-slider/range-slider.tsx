@@ -1,20 +1,26 @@
 import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
 import SliderInput from './slider-input'
+import cn from 'clsx'
 import './range-slider.css'
+
+export interface SliderRange {
+    min: number
+    max: number
+}
 
 export interface RangeSliderProps {
     min: number
     max: number
     step: number
-    onChange: (value: { min: number, max: number }) => void
+    onChange: (value: SliderRange) => void
 }
 
-const colors = { normal: '#20c93c', alert: '#be1c27' }
+type SliderColor = "normal" | "alert"
 
 const RangeSlider: FC<RangeSliderProps> = ({ min, max, step, onChange }) => {
-    const [minValue, SetMinValue] = useState(min)
-    const [maxValue, SetMaxValue] = useState(max)
-    const [color, SetColor] = useState(colors.normal)
+    const [minValue, setMinValue] = useState(min)
+    const [maxValue, setMaxValue] = useState(max)
+    const [color, setColor] = useState<SliderColor>("normal")
     const minValueRef = useRef<HTMLInputElement>(null)
     const maxValueRef = useRef<HTMLInputElement>(null)
     const rangeRef = useRef<HTMLDivElement>(null)
@@ -25,13 +31,13 @@ const RangeSlider: FC<RangeSliderProps> = ({ min, max, step, onChange }) => {
     )
 
     const handleMinInputChanged = (value: number) => {
-        const newValue = Math.min(value, maxValue - step)
-        SetMinValue(newValue);
+        const newValue = Math.max(Math.min(value, maxValue - step), min)
+        setMinValue(newValue);
     }
 
     const handleMaxInputChanged = (value: number) => {
-        const newValue = Math.max(value, minValue + step)
-        SetMaxValue(newValue);
+        const newValue = Math.min(Math.max(value, minValue + step), max)
+        setMaxValue(newValue);
     }
 
     useEffect(() => {
@@ -60,13 +66,13 @@ const RangeSlider: FC<RangeSliderProps> = ({ min, max, step, onChange }) => {
     useEffect(() => {
         if (rangeRef.current) {
             const observer = new ResizeObserver((entries) => {
-                const { width } = entries[0].contentRect
+                const { width } = entries[0]?.contentRect
 
                 if (width > 100) {
-                    SetColor(colors.normal)
+                    setColor("normal")
                 }
                 else {
-                    SetColor(colors.alert)
+                    setColor("alert")
                 }
             })
 
@@ -104,8 +110,11 @@ const RangeSlider: FC<RangeSliderProps> = ({ min, max, step, onChange }) => {
                 className='thumb thumb-right'
             />
             <div className='slider'>
-                <div className='slider-track'/>
-                <div ref={rangeRef} className='slider-range' style={{backgroundColor: color}}/>
+                <div className='slider-track' />
+                <div
+                    ref={rangeRef}
+                    className={cn('slider-range', `slider-${color}`)}
+                />
                 <div className='slider-left-value'>{minValue}</div>
                 <div className='slider-right-value'>{maxValue}</div>
             </div>
