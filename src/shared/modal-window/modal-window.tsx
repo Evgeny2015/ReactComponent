@@ -4,28 +4,20 @@ import cn from 'clsx'
 import './modal-window.css'
 
 export interface ModalWindowProps {
+    visible: boolean;
+    children: React.ReactNode;
     onClose: () => void
-    children: React.ReactNode
-}
+};
 
 /**
  * Modal Window component
  */
-const ModalWindow: FC<ModalWindowProps> = ({ onClose, children }) => {
-    const [visible, setVisible] = useState(true)
-
-    const onCloseHandle = () => {
-        onClose()
-        setVisible(false)
-    }
-
-    if (!visible) return null
-
-    return ReactDOM.createPortal(
-        <div className={cn('modalwindow-background')}
-            >
-            <div className={cn('modalwindow-container')}>
-                <div className={cn('body')}>
+const ModalWindow: FC<ModalWindowProps> = ({ visible, children, onClose }) => {
+  return (
+    <div className={cn('modalwindow-background', {'window-hidden': !visible})}
+        >
+        <div className={cn('modalwindow-container')}>
+            <div className={cn('body')}>
                     {children}
                 </div>
                 <div className={cn('footer')}>
@@ -38,9 +30,18 @@ const ModalWindow: FC<ModalWindowProps> = ({ onClose, children }) => {
                     </button>
                 </div>
             </div>
-        </div>,
-        document.body
-    );
+            <div className={cn('footer')}>
+                <button
+                    type='button'
+                    className={cn('close-button')}
+                    onClick={onClose}
+                >
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+  );
 };
 
 export default ModalWindow;
