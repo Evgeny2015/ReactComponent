@@ -11,7 +11,7 @@ export interface InputButtonProps {
 /**
  * Компонент инпута и кнопки, по кнопке открывается модальное окно с текстом из инпута
  */
-const InputButton: FC<InputButtonProps> = ({ text, ...props }) => {
+const InputButton: FC<InputButtonProps> = ({ text }) => {
     const [opened, setOpened] = useState(false);
 
     const handleOpenButton = () => {
@@ -19,9 +19,7 @@ const InputButton: FC<InputButtonProps> = ({ text, ...props }) => {
     }
 
     return (
-        <div className={cn('input-button')}
-            {...props}
-        >
+        <div className={cn('input-button')}>
             <div className={cn('input-button-container')}>
                 <input
                     value={text}

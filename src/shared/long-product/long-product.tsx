@@ -14,11 +14,9 @@ export interface LongProductProps {
 /**
  * Компонент полного отображения товара
  */
-const LongProduct: FC<LongProductProps> = ({ price, category, image, name, description, ...props }) => {
+const LongProduct: FC<LongProductProps> = ({ price, category, image, name, description }) => {
   return (
-    <div className={cn('long-product')}
-        {...props}
-    >
+    <div className={cn('long-product')}>
         <div className={cn('image')}>
             <img src={image} alt="image" />
         </div>
