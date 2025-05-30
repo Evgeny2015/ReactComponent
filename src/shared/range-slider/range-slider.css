@@ -82,3 +82,10 @@
 .thumb-right {
     z-index: 4;
 }
+
+.slider-normal {
+    background-color: #20c93c;
+}
+.slider-alert {
+    background-color: #be1c27;
+}
