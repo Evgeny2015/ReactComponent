@@ -28,7 +28,17 @@ const AddToBasketButton: FC<AddToBasketButtonProps> = ({ count }) => {
                 Добавить
         </button>
 
-        <div className={cn('button-container', {'invisible': count == 0 })}>
+        {!count &&
+            <button
+                type='button'
+                className={cn('button-container', 'button')}
+                >
+                    Добавить
+            </button>
+        }
+
+        { !!count &&
+        <div className={cn('button-container')}>
             <button
                 type="button"
                 className={cn('button-up')}
@@ -45,6 +55,7 @@ const AddToBasketButton: FC<AddToBasketButtonProps> = ({ count }) => {
                 className={cn('button-down')}
             >&gt;&gt;</button>
         </div>
+        }
     </div>
   );
 };
