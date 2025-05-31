@@ -18,25 +18,27 @@ export interface RangeSliderProps {
 type SliderColor = "normal" | "alert"
 
 const RangeSlider: FC<RangeSliderProps> = ({ min, max, step, onChange }) => {
-    const [minValue, setMinValue] = useState(min)
-    const [maxValue, setMaxValue] = useState(max)
+    const [actualMin, setActualMin] = useState(Math.min(min, max))
+    const [actualMax, setActualMax] = useState(Math.max(min, max))
+    const [minValue, setMinValue] = useState(actualMin)
+    const [maxValue, setMaxValue] = useState(actualMax)
     const [color, setColor] = useState<SliderColor>("normal")
     const minValueRef = useRef<HTMLInputElement>(null)
     const maxValueRef = useRef<HTMLInputElement>(null)
     const rangeRef = useRef<HTMLDivElement>(null)
 
     const getPercent = useCallback(
-        (value: number) => Math.round(((value - min) / (max - min)) * 100),
-        [min, max]
+        (value: number) => Math.round(((value - actualMin) / (actualMax - actualMin)) * 100),
+        [actualMin, actualMax]
     )
 
     const handleMinInputChanged = (value: number) => {
-        const newValue = Math.max(Math.min(value, maxValue - step), min)
+        const newValue = Math.max(Math.min(value, maxValue - step), actualMin)
         setMinValue(newValue);
     }
 
     const handleMaxInputChanged = (value: number) => {
-        const newValue = Math.min(Math.max(value, minValue + step), max)
+        const newValue = Math.min(Math.max(value, minValue + step), actualMax)
         setMaxValue(newValue);
     }
 
@@ -92,8 +94,8 @@ const RangeSlider: FC<RangeSliderProps> = ({ min, max, step, onChange }) => {
     return (
         <div className='container'>
             <SliderInput
-                min={min}
-                max={max}
+                min={actualMin}
+                max={actualMax}
                 step={step}
                 value={minValue}
                 inputRef={minValueRef}
@@ -101,8 +103,8 @@ const RangeSlider: FC<RangeSliderProps> = ({ min, max, step, onChange }) => {
                 className='thumb thumb-left'
             />
             <SliderInput
-                min={min}
-                max={max}
+                min={actualMin}
+                max={actualMax}
                 step={step}
                 value={maxValue}
                 inputRef={maxValueRef}
