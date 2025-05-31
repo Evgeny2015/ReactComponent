@@ -1,45 +1,47 @@
-import React from 'react';
+import React, { FC, useContext } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import cn from 'clsx';
+import ThemeToggle, { ThemeContext, ThemeProvider } from 'src/shared/theme-toggle/theme-toggle';
+import LanguageToggle, { LanguageProvider } from 'src/shared/lang-toggle/lang-toggle';
+import 'src/i18n/config';
+import { useTranslation } from 'react-i18next';
 
-function App() {
+
+const HeadTitle: FC = () => {
+      const { t } = useTranslation();
+      return (
+          <div>
+              <p>{t('title')}</p>
+          </div>
+      )
+}
+
+const AppForm: FC = () => {
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className={cn('App', theme + '-theme')}>
+      <header className={cn('App-header', theme + '-theme')}>
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-            <ul>
-                <li>Цели:
-                    <ul>
-                        <li>понять базовые принципы построения React приложения</li>
-                        <li>познакомиться с составом внешних модулей современного приложения на React (сохранение состояния, кеширование, графика и т.д.)</li>
-                        <li>познакомиться с заменами устаревших модулей (webpack)</li>
-                        <li>познакомиться с оценкой безопасности модулей</li>
-                    </ul>
-                </li>
 
-                <li>Какими технологиями хотилось бы овладеть
-                    <ul>
-                        <li>MOBX или аналог</li>
-                    </ul>
-                </li>
-
-                <li>Какими технологиями уже владеете
-                    <ul>
-                        <li>есть опыт разработки на MVC ASP.NET Framefork, Django, Angular</li>
-                    </ul>
-                </li>
-
-                <li>О себе
-                    <ul>
-						<li>Алексеев Евгений</li>
-                        <li>программист-разработчик</li>
-                    </ul>
-                </li>
-            </ul>
-        </p>
+        <HeadTitle/>
+        <div className='tools'>
+          <ThemeToggle />
+          <LanguageToggle/>
+        </div>
       </header>
     </div>
+  );
+}
+
+const App: FC = () => {
+  return (
+    <ThemeProvider>
+      <LanguageProvider>
+        <AppForm />
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }
 

@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import ShortProduct, { ShortProductProps } from './short-product';
 import React from 'react';
-import imageFile from '../../../files/product.webp';
+import imageFile from '../../../files/Y4dwCKmKocM.jpg';
 
 
 const meta: Meta<typeof ShortProduct> = {
