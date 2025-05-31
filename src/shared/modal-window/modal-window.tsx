@@ -8,33 +8,17 @@ export interface ModalWindowProps {
     children: React.ReactNode
 }
 
-const modalRoot = document.createElement('div');
-document.body.appendChild(modalRoot);
-
 /**
  * Modal Window component
  */
 const ModalWindow: FC<ModalWindowProps> = ({ onClose, children }) => {
     const [visible, setVisible] = useState(true)
-    const el = document.createElement('div')
-
-    useEffect(() => {
-        // console.debug('enter useEffec')
-        modalRoot.appendChild(el);
-
-
-        return () => {
-            // console.debug('leave useEffec')
-            modalRoot.removeChild(el);
-        };
-    }, [visible]);
 
     const onCloseHandle = () => {
         onClose()
         setVisible(false)
     }
 
-    // console.debug('render')
     if (!visible) return null
 
     return ReactDOM.createPortal(
@@ -55,7 +39,7 @@ const ModalWindow: FC<ModalWindowProps> = ({ onClose, children }) => {
                 </div>
             </div>
         </div>,
-        el
+        document.body
     );
 };
 

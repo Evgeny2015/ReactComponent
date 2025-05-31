@@ -15,7 +15,7 @@ export default meta;
 export const Main: StoryObj<typeof ModalWindow> = {
     render: (args: ModalWindowProps) => <ModalWindow {...args} />,
     args: {
-        onClose: () => { console.debug('close -->')},
+        onClose: () => { },
         children: ""
     }
 };
