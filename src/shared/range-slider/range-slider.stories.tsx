@@ -12,12 +12,22 @@ const meta: Meta<typeof RangeSlider> = {
 
 export default meta;
 
-export const Main: StoryObj<typeof RangeSlider> = {
+export const Normal: StoryObj<typeof RangeSlider> = {
     render: (args: RangeSliderProps) => <RangeSlider {...args} />,
     args: {
         min: 0,
         max: 100,
         step: 1,
+        onChange: ({ }) => {}
+    }
+};
+
+export const With_swapped_range: StoryObj<typeof RangeSlider> = {
+    render: (args: RangeSliderProps) => <RangeSlider {...args} />,
+    args: {
+        min: 100,
+        max: 0,
+        step: 5,
         onChange: ({ }) => {}
     }
 };
