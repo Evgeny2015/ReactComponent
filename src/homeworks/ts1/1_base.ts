@@ -87,10 +87,9 @@ type CustomerWithId = {
   id: number,
 } & Customer;
 
-
 export const transformCustomers = (customers: CustomerWithId[]): {[key: number]: Customer} => {
   return customers.reduce((acc, customer) => {
-    acc[customer.id] = { name: customer.name, age: customer.age, isSubscribed: customer.isSubscribed };
+    acc[customer.id] = { id: customer.id, name: customer.name, age: customer.age, isSubscribed: customer.isSubscribed };
     return acc;
-  }, {});
+  }, <{[key: number]: Customer}>{});
 };

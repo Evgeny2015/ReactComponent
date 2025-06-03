@@ -14,6 +14,10 @@ export interface InputButtonProps {
 const InputButton: FC<InputButtonProps> = ({ text }) => {
     const [opened, setOpened] = useState(false);
 
+    const handleClose = () => {
+
+    }
+
     const handleOpenButton = () => {
         setOpened(prev => !prev);
     }
@@ -29,7 +33,7 @@ const InputButton: FC<InputButtonProps> = ({ text }) => {
                     onClick={() => handleOpenButton() }
                     >Открыть</button>
             </div>
-            <ModalWindow visible={opened}>{text}</ModalWindow>
+            <ModalWindow visible={opened} onClose={handleClose}>{text}</ModalWindow>
         </div>
     );
 };

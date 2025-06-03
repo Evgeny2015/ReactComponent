@@ -1,7 +1,7 @@
-import { Meta, StoryObj } from '@storybook/react';
-import ModalWindow, { ModalWindowProps } from './modal-window';
-import { useArgs } from '@storybook/preview-api';
 import React, { useEffect } from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+import { useArgs } from '@storybook/preview-api';
+import ModalWindow, { ModalWindowProps } from './modal-window';
 
 const meta: Meta<typeof ModalWindow> = {
     title: 'Components/ModalWindow',

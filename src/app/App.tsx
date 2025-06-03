@@ -2,8 +2,10 @@ import React, { FC, useContext } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import cn from 'clsx';
-import ThemeToggle, { ThemeContext, ThemeProvider } from 'src/shared/theme-toggle/theme-toggle';
-import LanguageToggle, { LanguageProvider } from 'src/shared/lang-toggle/lang-toggle';
+import { ThemeContext, ThemeProvider } from 'src/shared/theme-provider/theme-provider';
+import ThemeToggle from 'src/shared/theme-toggle/theme-toggle';
+import LanguageToggle from 'src/shared/lang-toggle/lang-toggle';
+import { LanguageProvider } from 'src/shared/lang-provider/lang-provider';
 import 'src/i18n/config';
 import { useTranslation } from 'react-i18next';
 
