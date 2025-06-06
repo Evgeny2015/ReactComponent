@@ -22,8 +22,8 @@ const LongProduct: FC<LongProductProps> = ({ price, category, image, name, descr
         </div>
         <div className={cn('product')}>
             <div className={cn('category')}>{category}</div>
-            <div className={cn('short-string', 'name')}>{name}</div>
-            <div className={cn('short-string', 'desc')}>{description}</div>
+            <div className={cn('long-string', 'name')}>{name}</div>
+            <div className={cn('long-string', 'desc')}>{description}</div>
         </div>
 
         <div className={cn('basket')}>

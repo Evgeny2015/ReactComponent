@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, StoryObj } from '@storybook/react'
-import ProductForm from './ProductForm'
+import ProductForm, { IProduct } from './ProductForm'
 
 const meta: Meta<typeof ProductForm> = {
     title: 'Components/ProductForm',
@@ -10,12 +10,15 @@ const meta: Meta<typeof ProductForm> = {
 
 export default meta;
 
+const handleSubmit = (data: IProduct) => {
+    console.debug(data)
+}
+
 export const Main: StoryObj<typeof ProductForm> = {
     render: () => {
-        console.debug('render')
 
         return (
-            <ProductForm/>
+            <ProductForm onSubmit={handleSubmit}/>
         )
     }
 }

@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react'
 import { useArgs } from '@storybook/preview-api'
 import ProdOperList, { IShortOperationWithId, IShortProductWithId } from './prod-oper-list'
 import React, { ReactNode, useEffect, useRef, useState } from 'react'
-import { v4 as uuid } from 'uuid'
+import { generateOperation, generateOperationsOrProducts, generateShortProduct } from '../../../src/mocks/prod-oper.generate'
 import './prod-oper-list.stories.css'
 
 
@@ -25,38 +25,6 @@ interface IListData {
     grow: (cnt?: number) => void
 }
 
-// Генерация случайной операции
-const generateOperation = (): IShortOperationWithId => {
-    const index = (100*Math.random()).toFixed(0)
-
-    return {
-        category: `Категория ${index}`,
-        description: `Описание  ${index}`,
-        id: uuid(),
-        name: `Название  ${index}`,
-        sum: Math.round(1e4*Math.random())/1e2
-    }
-}
-
-// Генерация случайного товара
-const generateProduct = (): IShortProductWithId => {
-    const index = (100*Math.random()).toFixed(0)
-
-    return {
-        description: `Описание  ${index}`,
-        id: uuid(),
-        image: '',
-        name: `Название  ${index}`,
-        price: Math.round(1e4*Math.random())/1e2,
-    }
-}
-
-// Генерация списка операций или товаров
-const generateOperationsOrProducts: <T = IShortOperationWithId | IShortProductWithId>(cnt: number, create: () => T) => T[] = (cnt, create) => {
-    return Array.from(Array(cnt).keys()).map(() => create())
-}
-
-
 // Список операций
 let operData: IShortOperationWithId[] = generateOperationsOrProducts(OPER_LIST_COUNT, generateOperation)
 const growOperData = (cnt: number) => {
@@ -75,9 +43,9 @@ const operList: IListData = {
 }
 
 // Список товаров
-let prodData: IShortProductWithId[] = generateOperationsOrProducts(PRODUCT_LIST_COUNT, generateProduct)
+let prodData: IShortProductWithId[] = generateOperationsOrProducts(PRODUCT_LIST_COUNT, generateShortProduct)
 const growProdData = (cnt: number) => {
-    prodData = [...prodData, ...generateOperationsOrProducts(cnt, generateProduct)]
+    prodData = [...prodData, ...generateOperationsOrProducts(cnt, generateShortProduct)]
 }
 const prodList: IListData = {
     getProps: () => {

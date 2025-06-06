@@ -1,5 +1,7 @@
-.theme-toggle button {
+.theme-toggle {
     display: flex;
+}
+.theme-toggle button {
     border: none;
     padding: 10px 15px;
     font-weight: bolder;
