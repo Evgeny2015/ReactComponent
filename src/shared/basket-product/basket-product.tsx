@@ -11,7 +11,7 @@ export interface BasketProductProps {
 /**
  * Компонент отображения товара для корзины
  */
-const ShortProduct: FC<BasketProductProps> = ({ price, image, name }) => {
+const BasketProduct: FC<BasketProductProps> = ({ price, image, name }) => {
   return (
     <div className={cn('basket-product')}
     >
@@ -35,4 +35,4 @@ const ShortProduct: FC<BasketProductProps> = ({ price, image, name }) => {
   );
 };
 
-export default ShortProduct;
+export default BasketProduct;

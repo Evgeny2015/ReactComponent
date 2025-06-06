@@ -3,9 +3,9 @@
 }
 
 .button-container .button {
-    border: 0;
+    border: 3px;
     padding: 8px;
-    background-color: rgb(116, 209, 23);
+    background-color: rgb(68, 125, 210);
     color: #f4f1f1;
     font-weight: bolder;
 }

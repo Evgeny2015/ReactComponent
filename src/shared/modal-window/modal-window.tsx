@@ -21,13 +21,13 @@ const ModalWindow: FC<ModalWindowProps> = ({ visible, children, onClose }) => {
                     {children}
                 </div>
                 <div className={cn('footer')}>
-                    <button
+                    {/* <button
                         type='button'
                         className={cn('close-button')}
                         onClick={onClose}
                     >
                         Close
-                    </button>
+                    </button> */}
                 </div>
             </div>
         </div>

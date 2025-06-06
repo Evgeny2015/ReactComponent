@@ -8,7 +8,7 @@ const ProfileForm = memo<ProfileFormProps>(
     const { values, touched, errors, submitCount, handleBlur, handleSubmit, handleChange } = formManager;
 
     return (
-      <form ref={formElement} onSubmit={handleSubmit}>
+      <form ref={formElement} onSubmit={handleSubmit} className={className}>
         <NameField
           autoFocusElement={autoFocusElement}
           onBlur={handleBlur}

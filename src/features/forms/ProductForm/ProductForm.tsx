@@ -2,17 +2,23 @@ import React, { FC } from "react"
 import { Button, Form, Input } from 'antd';
 import { useForm, SubmitHandler, Controller } from "react-hook-form"
 import { FormItem } from '../../../shared/form-item/form-item';
+import { data } from "react-router";
 
 
 export interface IProduct {
-    price: number;          // стоимость
-    name: string;           // название
-    description: string;    // описание
+    price: number          // стоимость
+    name: string           // название
+    description: string    // описание
 };
 
-const ProductForm: FC = () => {
+export interface IProductProps {
+    product?: IProduct
+    onSubmit: SubmitHandler<IProduct>
+}
+
+const ProductForm: FC<IProductProps> = ({product, onSubmit }) => {
     const { control, handleSubmit, formState: { errors } } = useForm<IProduct>()
-    const onSubmit: SubmitHandler<IProduct> = (data) => console.log(data)
+    // const onSubmit: SubmitHandler<IProduct> = (data) =>
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>

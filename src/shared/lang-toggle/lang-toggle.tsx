@@ -17,7 +17,7 @@ const LanguageToggle: FC = () => {
                     key={lng}
                     className={cn({'selected': language === lng})}
                     type="button"
-                    onClick={() => setLanguage(lng)}
+                    onClick={() => { if (lng !== language) setLanguage(lng)}}
                     >{Languages[lng].name}
                 </button>
             ))}
