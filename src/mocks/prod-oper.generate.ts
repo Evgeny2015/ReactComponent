@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 import { IShortOperationWithId, IShortProductWithId } from "src/shared/prod-oper-list/prod-oper-list"
-import { LongProductProps } from 'src/shared/long-product/long-product'
+import { Product } from 'src/models/product'
 
 // Генерация случайной операции
 export const generateOperation = (): IShortOperationWithId => {
@@ -34,7 +34,7 @@ export const generateOperationsOrProducts: <T = IShortOperationWithId | IShortPr
 }
 
 // Генерация случайного полного товара
-export const generateLongProduct = (): LongProductProps & { id: string } => {
+export const generateLongProduct = (): Product & { id: string } => {
     const index = (100 * Math.random()).toFixed(0)
 
     return {
@@ -48,6 +48,6 @@ export const generateLongProduct = (): LongProductProps & { id: string } => {
 }
 
 // Генерация случайного полного товара
-export const generateLongProducts = (cnt: number): (LongProductProps & { id: string })[] => {
+export const generateLongProducts = (cnt: number): (Product & { id: string })[] => {
     return Array.from(Array(cnt).keys()).map(() => generateLongProduct())
 }

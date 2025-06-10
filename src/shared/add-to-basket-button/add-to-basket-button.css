@@ -10,6 +10,11 @@
     font-weight: bolder;
 }
 
+.button-container .button:active {
+    background-color: salmon;
+    color: white;
+}
+
 .button-container .input {
     border: 0;
     border-bottom: 1px solid #7b7474;

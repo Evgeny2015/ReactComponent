@@ -2,7 +2,6 @@ import React, { FC } from "react"
 import { Button, Form, Input } from 'antd';
 import { useForm, SubmitHandler, Controller } from "react-hook-form"
 import { FormItem } from '../../../shared/form-item/form-item';
-import { data } from "react-router";
 
 
 export interface IProduct {
@@ -13,11 +12,12 @@ export interface IProduct {
 
 export interface IProductProps {
     product?: IProduct
+    onCancel: () => void
     onSubmit: SubmitHandler<IProduct>
 }
 
-const ProductForm: FC<IProductProps> = ({product, onSubmit }) => {
-    const { control, handleSubmit, formState: { errors } } = useForm<IProduct>()
+const ProductForm: FC<IProductProps> = ({product, onCancel, onSubmit }) => {
+    const { control, handleSubmit, formState: { errors } } = useForm<IProduct>({defaultValues: product})
     // const onSubmit: SubmitHandler<IProduct> = (data) =>
 
     return (
@@ -85,6 +85,7 @@ const ProductForm: FC<IProductProps> = ({product, onSubmit }) => {
             />
 
             <Button htmlType="submit">Сохранить</Button>
+            <Button onClick={onCancel}>Отмена</Button>
         </form>
     )
 }
