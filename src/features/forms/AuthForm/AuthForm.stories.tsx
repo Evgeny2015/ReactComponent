@@ -66,7 +66,7 @@ export const Main: StoryObj<typeof AuthForm> = {
         const { submitForm, setValues } = formManager;
 
         useEffect(() => {
-            console.log('formManager')
+            // console.log('formManager')
         }, [auth, setValues])
 
         return (

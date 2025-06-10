@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import '../../i18n/config';
-import LanguageProvider from '../lang-provider/lang-provider';
+import LanguageProvider from '../../context/lang-provider/lang-provider';
 import LanguageToggle  from './lang-toggle';
 import { useTranslation } from 'react-i18next';
 

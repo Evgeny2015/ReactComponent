@@ -1,10 +1,11 @@
 import React, { FC, useMemo, useState } from "react"
 import { FormikConfig, useFormik } from "formik";
+import { Button } from "antd";
+import { useNavigate } from "react-router"
+
 import ProfileForm from "src/features/forms/ProfileForm/ProfileForm"
 import { ProfileFormErrors, ProfileFormValues } from "src/features/forms/ProfileForm/types";
 import { isNotDefinedString } from "src/utils/validation";
-import { Button } from "antd";
-import { useNavigate } from "react-router"
 import './ProfilePage.css'
 
 const ProfilePage: FC = () => {

@@ -10,6 +10,11 @@ const meta: Meta<typeof ProductForm> = {
 
 export default meta;
 
+
+const handleCancel = () => {
+    console.debug("cancel")
+}
+
 const handleSubmit = (data: IProduct) => {
     console.debug(data)
 }
@@ -18,7 +23,7 @@ export const Main: StoryObj<typeof ProductForm> = {
     render: () => {
 
         return (
-            <ProductForm onSubmit={handleSubmit}/>
+            <ProductForm onCancel={handleCancel} onSubmit={handleSubmit}/>
         )
     }
 }

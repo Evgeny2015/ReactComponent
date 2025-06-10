@@ -1,20 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './app/index.css';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router'
+
+import { rtkStore } from 'src/store/store'
+import { LanguageProvider } from "src/context/lang-provider/lang-provider"
+import { ThemeProvider } from "src/context/theme-provider/theme-provider"
 import App from './app/App';
-import { BrowserRouter } from 'react-router';
-import { LanguageProvider } from "src/shared/lang-provider/lang-provider"
-import { ThemeProvider } from "src/shared/theme-provider/theme-provider"
+import './app/index.css';
+import AuthProvider from './context/auth-provider/AuthProvider'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <ThemeProvider>
-      <LanguageProvider>
+    <Provider store={rtkStore}>
+      <AuthProvider>
         <BrowserRouter>
-          <App />
+          <ThemeProvider>
+            <LanguageProvider>
+              <App />
+            </LanguageProvider>
+          </ThemeProvider>
         </BrowserRouter>
-      </LanguageProvider>
-    </ThemeProvider>
+      </AuthProvider>
+    </Provider>
   </React.StrictMode>
 )
