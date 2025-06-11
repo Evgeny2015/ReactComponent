@@ -12,6 +12,7 @@ import ProfilePage from "src/pages/profile/ProfilePage"
 import ProductPage from "src/pages/product/ProductPage"
 import BasketPage from "src/pages/basket/BasketPage"
 import NotFoundPage from "src/pages/not-found/not-found"
+import AppRoutes from "./Routes"
 
 const App: FC = () => {
   const { language } = useContext(LanguageContext);
@@ -21,15 +22,7 @@ const App: FC = () => {
   }, [language])
 
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route index path="/" element={<Navigate to={"/prod"} />} />
-        <Route index path="/prod" element={<ProductPage />} />
-        <Route path="/basket" element={<BasketPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Route>
-    </Routes>
+    <AppRoutes />
   )
 }
 

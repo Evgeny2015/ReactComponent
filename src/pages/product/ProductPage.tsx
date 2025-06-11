@@ -1,11 +1,14 @@
 import React, { FC, useEffect, useRef, useState } from "react"
+import { useNavigate } from "react-router"
+
 import { generateLongProducts } from "src/mocks/prod-oper.generate"
-import './ProductPage.css'
 import LongProduct from "src/shared/long-product/long-product"
 import { Button } from "antd"
 import { Modal } from "src/shared/modal-window/modal"
 import EditOperation from "src/shared/edit-operation/edit-operation"
 import ProductForm, { IProduct } from "src/features/forms/ProductForm/ProductForm"
+import ProductEditDialog from "../prod-edit/prod-edit.page"
+import './ProductPage.css'
 
 
 const PRODUCT_LIST_COUNT = 20
@@ -22,7 +25,7 @@ const ProductPage: FC = () => {
   const containerRef = useRef(null)
   const [lastItem, setLastItem] = useState(null)
   const [product, setProduct] = useState(productData)
-  const [editVisible, setEditVisible] = useState(false)
+  const navigator = useNavigate()
 
   // Сохраняем последний элемент из списка. Этот элемент используется для наблюдения
   const setLastItemHandle = () => {
@@ -69,19 +72,6 @@ const ProductPage: FC = () => {
     }
   }, [lastItem])
 
-  const handleOnClose = () => {
-    setEditVisible(false)
-  }
-
-  const handleOnOpen = () => {
-    setEditVisible(true)
-  }
-
-  const handleSubmit = (data: IProduct) => {
-      handleOnClose()
-      console.debug(data)
-  }
-
   return (
     <div>
       <div className='scrollBox' ref={containerRef}>
@@ -97,12 +87,8 @@ const ProductPage: FC = () => {
           ))
         }
       </div>
-      {/* <EditOperation name="Название" date={new Date()}></EditOperation> */}
 
-      <Modal onClose={handleOnClose} visible={editVisible}>
-        <ProductForm onSubmit={handleSubmit}></ProductForm>
-      </Modal>
-      <Button onClick={handleOnOpen}>Редактировать</Button>
+      <Button onClick={() => navigator("/edit")}>Ред-ть</Button>
     </div>
   )
 }
