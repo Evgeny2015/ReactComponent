@@ -1,4 +1,6 @@
 import React, { FC, useEffect, useRef, useState } from "react"
+import { useNavigate } from "react-router"
+
 import { generateLongProducts } from "src/mocks/prod-oper.generate"
 import LongProduct from "src/shared/long-product/long-product"
 import { Modal } from "src/shared/modal-window/modal"
@@ -27,7 +29,7 @@ const ProductPage: FC = () => {
   const dispatcher = useDispatch()
   const [lastItem, setLastItem] = useState(null)
   const [product, setProduct] = useState(productData)
-  const [editVisible, setEditVisible] = useState(false)
+  const navigator = useNavigate()
 
   // Сохраняем последний элемент из списка. Этот элемент используется для наблюдения
   const setLastItemHandle = () => {

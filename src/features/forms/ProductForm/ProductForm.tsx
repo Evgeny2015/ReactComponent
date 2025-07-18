@@ -18,7 +18,6 @@ export interface IProductProps {
 
 const ProductForm: FC<IProductProps> = ({product, onCancel, onSubmit }) => {
     const { control, handleSubmit, formState: { errors } } = useForm<IProduct>({defaultValues: product})
-    // const onSubmit: SubmitHandler<IProduct> = (data) =>
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -84,7 +83,8 @@ const ProductForm: FC<IProductProps> = ({product, onCancel, onSubmit }) => {
                 )}
             />
 
-            <Button htmlType="submit">Сохранить</Button>
+            <Button htmlType="submit" type="primary">Сохранить</Button>
+            <Button onClick={onCancel}>Отмена</Button>
             <Button onClick={onCancel}>Отмена</Button>
         </form>
     )

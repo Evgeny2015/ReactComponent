@@ -11,7 +11,7 @@ import ProfilePage from "src/pages/profile/ProfilePage"
 import ProductPage from "src/pages/product/ProductPage"
 import BasketPage from "src/pages/basket/BasketPage"
 import NotFoundPage from "src/pages/not-found/not-found"
-import { appActions } from "src/store/app"
+import AppRoutes from "./Routes"
 
 import AuthPage from "src/pages/auth/AuthPage"
 import RoleRoute from "src/shared/role-route/RoleRoute"
@@ -24,7 +24,7 @@ const App: FC = () => {
     document.title = t("title")
   }, [language])
 
-  // РЈСЃС‚Р°РЅРѕРІРёРј СЃРѕСЃС‚РѕСЏРЅРёРµ РїСЂРёР»РѕР¶РµРЅРёСЏ
+  // Установим состояние приложения
   useDispatch()(appActions.set())
 
   return (
