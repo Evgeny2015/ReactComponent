@@ -10,6 +10,7 @@ import { Product } from "src/models/product"
 import { useDispatch } from "react-redux"
 import { basketActions } from "src/store/basket"
 import './ProductPage.css'
+import { Button } from "antd"
 
 
 const PRODUCT_LIST_COUNT = 20
@@ -29,6 +30,7 @@ const ProductPage: FC = () => {
   const dispatcher = useDispatch()
   const [lastItem, setLastItem] = useState(null)
   const [product, setProduct] = useState(productData)
+  // const [editVisible, setEditVisible] = useState(false)
   const navigator = useNavigate()
 
   // Сохраняем последний элемент из списка. Этот элемент используется для наблюдения
@@ -77,7 +79,7 @@ const ProductPage: FC = () => {
   }, [lastItem])
 
   const handleOnClose = () => {
-    setEditVisible(false)
+    // setEditVisible(false)
   }
 
   const handleSubmit = (data: IProduct) => {
@@ -94,7 +96,7 @@ const ProductPage: FC = () => {
   const handleEditProduct = (product: Product) => {
     const { price, name, description} = product
     editProduct = { price, name, description }
-    setEditVisible(true)
+    // setEditVisible(true)
   }
 
   return (
@@ -116,9 +118,7 @@ const ProductPage: FC = () => {
         }
       </div>
 
-      <Modal onClose={handleOnClose} visible={editVisible}>
-        <ProductForm product={editProduct} onCancel={handleOnClose} onSubmit={handleSubmit} />
-      </Modal>
+      <Button onClick={() => navigator("/edit")}>Ред-ть</Button>
     </div>
   )
 }
