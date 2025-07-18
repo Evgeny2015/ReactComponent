@@ -13,12 +13,12 @@ export interface IProduct {
 
 export interface IProductProps {
     product?: IProduct
-    onCancel: () => void
     onSubmit: SubmitHandler<IProduct>
 }
 
-const ProductForm: FC<IProductProps> = ({product, onCancel, onSubmit }) => {
+const ProductForm: FC<IProductProps> = ({product, onSubmit }) => {
     const { control, handleSubmit, formState: { errors } } = useForm<IProduct>()
+    // const onSubmit: SubmitHandler<IProduct> = (data) =>
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -84,8 +84,7 @@ const ProductForm: FC<IProductProps> = ({product, onCancel, onSubmit }) => {
                 )}
             />
 
-            <Button htmlType="submit" type="primary">Сохранить</Button>
-            <Button onClick={onCancel}>Отмена</Button>
+            <Button htmlType="submit">Сохранить</Button>
         </form>
     )
 }
