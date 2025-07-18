@@ -32,6 +32,7 @@ export const Main: StoryObj<typeof ModalWindow> = {
         )
     },
     args: {
+        visible: false,
         children: ""
     }
 };

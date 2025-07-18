@@ -18,7 +18,7 @@ export const Main: StoryObj<typeof ProductForm> = {
     render: () => {
 
         return (
-            <ProductForm onCancel={() => {}} onSubmit={handleSubmit}/>
+            <ProductForm onSubmit={handleSubmit}/>
         )
     }
 }
