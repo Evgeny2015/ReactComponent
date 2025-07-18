@@ -95,7 +95,7 @@ export const isTooMany = (count: number, limit: number): boolean => count > limi
 export const isNotDefinedString = (string?: string): boolean => !string?.trim();
 
 export const isLongEnough = (word: string, minLength: number = MIN_LENGTH_PASSWORD): boolean =>
-  word?.length > minLength;
+  word?.length >= minLength;
 
 export const isNotValidEmail = (email: string): boolean => {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

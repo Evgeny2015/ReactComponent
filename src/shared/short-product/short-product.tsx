@@ -8,12 +8,13 @@ export interface ShortProductProps {
     image: string;       // изображение
     name: string;           // название
     description: string;    // описание
+    onClick?: () => void
 };
 
 /**
  * Компонент краткого отображения товара
  */
-const ShortProduct: FC<ShortProductProps> = ({ price, image, name, description }) => {
+const ShortProduct: FC<ShortProductProps> = ({ price, image, name, description, onClick }) => {
   return (
     <div className={cn('short-product')}>
         <div className={cn('image')}>
@@ -26,7 +27,7 @@ const ShortProduct: FC<ShortProductProps> = ({ price, image, name, description }
 
         <div className={cn('basket')}>
             <div className={cn('price')}>{price}</div>
-            <AddToBasketButton count={0}>Добавить</AddToBasketButton>
+            <AddToBasketButton count={0} onClick={onClick}>Добавить</AddToBasketButton>
         </div>
     </div>
   );

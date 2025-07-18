@@ -1,5 +1,5 @@
 import React, { FC, useContext } from 'react';
-import { ThemeContext } from '../theme-provider/theme-provider';
+import { ThemeContext } from '../../context/theme-provider/theme-provider';
 import cn from 'clsx';
 import './theme-toggle.css';
 
