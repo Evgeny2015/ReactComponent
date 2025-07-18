@@ -33,7 +33,7 @@ const InputButton: FC<InputButtonProps> = ({ text }) => {
                     onClick={() => handleOpenButton() }
                     >Открыть</button>
             </div>
-            <ModalWindow visible={opened} onClose={handleClose}>{text}</ModalWindow>
+            <ModalWindow >{text}</ModalWindow>
         </div>
     );
 };
