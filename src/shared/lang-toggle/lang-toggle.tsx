@@ -1,7 +1,7 @@
 import React, { FC, ReactNode, createContext, useContext, useState } from 'react';
 import cn from 'clsx';
 import './lang-toggle.css';
-import { Language, LanguageContext, Languages } from '../lang-provider/lang-provider';
+import { Language, LanguageContext, Languages } from '../../context/lang-provider/lang-provider';
 
 
 /**

@@ -1,11 +1,13 @@
 import React, { FC, useEffect, useRef, useState } from "react"
 import { generateLongProducts } from "src/mocks/prod-oper.generate"
-import './ProductPage.css'
 import LongProduct from "src/shared/long-product/long-product"
-import { Button } from "antd"
 import { Modal } from "src/shared/modal-window/modal"
 import EditOperation from "src/shared/edit-operation/edit-operation"
 import ProductForm, { IProduct } from "src/features/forms/ProductForm/ProductForm"
+import { Product } from "src/models/product"
+import { useDispatch } from "react-redux"
+import { basketActions } from "src/store/basket"
+import './ProductPage.css'
 
 
 const PRODUCT_LIST_COUNT = 20
@@ -18,8 +20,11 @@ const growProdData = (cnt: number = LIST_GROW_COUNT) => {
   productData = [...productData, ...generateLongProducts(cnt)]
 }
 
+let editProduct: IProduct | null = null
+
 const ProductPage: FC = () => {
   const containerRef = useRef(null)
+  const dispatcher = useDispatch()
   const [lastItem, setLastItem] = useState(null)
   const [product, setProduct] = useState(productData)
   const [editVisible, setEditVisible] = useState(false)
@@ -73,36 +78,45 @@ const ProductPage: FC = () => {
     setEditVisible(false)
   }
 
-  const handleOnOpen = () => {
-    setEditVisible(true)
+  const handleSubmit = (data: IProduct) => {
+    handleOnClose()
+    console.debug(data)
   }
 
-  const handleSubmit = (data: IProduct) => {
-      handleOnClose()
-      console.debug(data)
+  // добавляем товар в корзину
+  const handleAddToBasket = (product: Product) => {
+    dispatcher(basketActions.add(product))
+  }
+
+  // редактируем товар
+  const handleEditProduct = (product: Product) => {
+    const { price, name, description} = product
+    editProduct = { price, name, description }
+    setEditVisible(true)
   }
 
   return (
     <div>
       <div className='scrollBox' ref={containerRef}>
-        { product.map(x => (
-            <LongProduct
-              key={x.id}
-              category={x.category}
-              description={x.description}
-              image={x.image}
-              name={x.name}
-              price={x.price}
-            />
-          ))
+        {product.map(x => (
+          <LongProduct
+            key={x.id}
+            id={x.id}
+            category={x.category}
+            description={x.description}
+            image={x.image}
+            name={x.name}
+            price={x.price}
+            onAddToBasket={handleAddToBasket}
+            onEditProduct={handleEditProduct}
+          />
+        ))
         }
       </div>
-      {/* <EditOperation name="Название" date={new Date()}></EditOperation> */}
 
       <Modal onClose={handleOnClose} visible={editVisible}>
-        <ProductForm onSubmit={handleSubmit}></ProductForm>
+        <ProductForm product={editProduct} onCancel={handleOnClose} onSubmit={handleSubmit} />
       </Modal>
-      <Button onClick={handleOnOpen}>Редактировать</Button>
     </div>
   )
 }

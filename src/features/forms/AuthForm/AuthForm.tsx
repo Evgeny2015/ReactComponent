@@ -1,5 +1,4 @@
 import React, { memo } from 'react'
-import cn from 'clsx'
 import { AuthFormProps } from './types'
 import { PasswordField } from './PasswordField/PasswordField'
 import EmailField from './EmailField/EmailField'

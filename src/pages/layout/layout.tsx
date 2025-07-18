@@ -1,46 +1,76 @@
-import React, { FC } from "react"
+import React, { FC, useEffect, useState } from "react"
 import { NavLink, Outlet, useLocation } from "react-router"
 import { Layout as ALayout, Menu } from 'antd'
-import { ProductOutlined, ShoppingCartOutlined, ProfileOutlined } from '@ant-design/icons'
+import { ProductOutlined, ShoppingCartOutlined, ProfileOutlined, LoginOutlined } from '@ant-design/icons'
 import { MenuItemType } from "antd/es/menu/interface"
 import LanguageToggle from "src/shared/lang-toggle/lang-toggle"
 import ThemeToggle from "src/shared/theme-toggle/theme-toggle"
 import "./layout.css"
 import logo from "./logo.svg"
-import { title } from "process"
 import RefIcon from "@ant-design/icons/lib/icons/AccountBookFilled"
+import { useAuth, UserRole } from "src/context/auth-provider/AuthProvider"
 
-interface RouteMenuItem extends MenuItemType {
-    path: string
+
+type MenuVisibleType = "any" | "auth" | 'notauth'
+
+interface RouteMenuItem {
+    menu: MenuItemType,
+    path: string,
+    visType: MenuVisibleType,
+    role: UserRole | null,
 }
 
-const CreateRouteMenuItem = (id: number, title: string, path: string, icon: typeof RefIcon): RouteMenuItem => {
+const CreateRouteMenuItem = (id: number, title: string, path: string, icon: typeof RefIcon,
+    visibleType: MenuVisibleType = "any", role: UserRole | null = null): RouteMenuItem => {
+
     return {
-        key: id,
-        icon: React.createElement(ProductOutlined),
-        label: title,
-        extra: React.createElement(NavLink, { to: path }),
-        path
+        menu: {
+            key: id,
+            icon: React.createElement(ProductOutlined),
+            label: title,
+            extra: React.createElement(NavLink, { to: path }),
+        },
+        path,
+        visType: visibleType,
+        role,
     }
 }
 
-const items: RouteMenuItem[] = [
+const menuItems: RouteMenuItem[] = [
     CreateRouteMenuItem(1, 'Каталог', "/prod", ProductOutlined),
     CreateRouteMenuItem(2, 'Корзина', "/basket", ShoppingCartOutlined),
-    CreateRouteMenuItem(3, 'Профиль', "/profile", ProfileOutlined),
-    ]
+    CreateRouteMenuItem(3, 'Профиль', "/profile", ProfileOutlined, "auth", "admin"),
+    CreateRouteMenuItem(4, 'Вход', "/auth", LoginOutlined, "notauth"),
+    CreateRouteMenuItem(5, 'Выход', "/logout", LoginOutlined, "auth"),
+]
 
 const handleDefaultSelectedKeys = (): string[] => {
-    return items.length > 0 ? [items[0].key.toString()] : []
+    return menuItems.length > 0 ? [menuItems[0].menu.key.toString()] : []
 }
 
 const handleSelectedKeys = (path: string): string[] => {
-    const selected = items.filter(x => x.path === path).map(x => x.key.toString())
+    const selected = menuItems.filter(x => x.path === path).map(x => x.menu.key.toString())
     return selected
 }
 
 const Layout: FC = () => {
-    const location = useLocation();
+    const { hasRole, isAuthenticated, roles } = useAuth()
+    const location = useLocation()
+    const [visibleMenuItems, setVisibleMenuItems] = useState<MenuItemType[]>([])
+
+    useEffect(() => {
+        const authenticated = isAuthenticated()
+        const items = menuItems
+            .filter(
+                x => x.visType === "any" ||
+                x.visType === "auth" && authenticated ||
+                x.visType === "notauth" && !authenticated
+                )
+            .filter(x => x.role === null || hasRole(x.role))
+            .map(x => x.menu)
+
+        setVisibleMenuItems(items)
+    }, [roles])
 
     return (
         <ALayout>
@@ -52,8 +82,8 @@ const Layout: FC = () => {
                         mode="horizontal"
                         defaultSelectedKeys={handleDefaultSelectedKeys()}
                         selectedKeys={handleSelectedKeys(location.pathname)}
-                        items={items}
-                        />
+                        items={visibleMenuItems}
+                    />
                 </div>
                 <div className="header-tools">
                     <ThemeToggle />
