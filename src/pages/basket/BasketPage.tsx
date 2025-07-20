@@ -24,6 +24,8 @@ const BasketPage: FC = () => {
   }
 
   return (
+    (prodInBasket.length == 0) ?
+    <div>Корзина пуста</div> :
     <div className='scrollBox' ref={containerRef}>
       { prodInBasket.map(x => (
           <BasketProduct
