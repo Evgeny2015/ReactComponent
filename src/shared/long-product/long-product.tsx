@@ -2,9 +2,10 @@ import React, { FC } from 'react';
 import cn from 'clsx';
 import './long-product.css';
 import AddToBasketButton from '../add-to-basket-button/add-to-basket-button';
-import { Product } from 'src/models/product';
+import { useAuth } from '../../context/auth-provider/AuthProvider';
+import { Product } from '../../models/product';
+
 import { Button } from 'antd';
-import { useAuth } from 'src/context/auth-provider/AuthProvider';
 
 export interface LongProductProps extends Product {
     onAddToBasket?: (product: Product) => void

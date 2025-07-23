@@ -1,10 +1,10 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { AuthData } from "src/models/auth"
-import { Profile } from "src/models/profile"
-import { profileActions } from "src/store/profile"
-import { RtkDispatch } from "src/store/store"
-import { tokenSelectors, tokenThunks } from "src/store/token"
+import { AuthData } from "../../models/auth"
+import { Profile } from "../../models/profile"
+import { profileActions } from "../../store/profile"
+import { RtkDispatch } from "../../store/store"
+import { tokenSelectors, tokenThunks } from "../../store/token"
 
 
 export type UserRole = "user" | "admin"

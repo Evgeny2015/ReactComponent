@@ -85,7 +85,6 @@ const ProductForm: FC<IProductProps> = ({product, onCancel, onSubmit }) => {
 
             <Button htmlType="submit" type="primary">Сохранить</Button>
             <Button onClick={onCancel}>Отмена</Button>
-            <Button onClick={onCancel}>Отмена</Button>
         </form>
     )
 }
