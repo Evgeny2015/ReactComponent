@@ -1,4 +1,4 @@
 export interface Profile {
-    name: string;
-    about: string;
+    email: string;
+    signUpDate: string;
 }

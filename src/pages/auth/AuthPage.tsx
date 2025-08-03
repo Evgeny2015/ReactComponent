@@ -26,9 +26,6 @@ const AuthPage: FC = () => {
             onSubmit: (values, { setErrors }) => {
                 try {
                     // Сохранение данных формы
-                    // value - содержит поля формы
-
-                    values.email = 'user@mail'
                     if (login(values)) {
                         navigate('/')
                     }

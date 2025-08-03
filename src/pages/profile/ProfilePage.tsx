@@ -9,7 +9,7 @@ import { isNotDefinedString } from "src/utils/validation";
 import './ProfilePage.css'
 
 const ProfilePage: FC = () => {
-  const [profile, setProfile] = useState({ name: '', about: '' })
+  const [profile, setProfile] = useState({ email: '', signUpDate: '' })
   const navigate = useNavigate()
 
   const { onSubmit, validate, initialValues } = useMemo<
@@ -17,8 +17,8 @@ const ProfilePage: FC = () => {
   >(() => {
     return {
       initialValues: {
-        name: profile?.name,
-        about: profile?.about,
+        email: profile?.email,
+        signUpDate: profile?.signUpDate,
       },
       onSubmit: (values, { setErrors }) => {
         try {
@@ -37,8 +37,8 @@ const ProfilePage: FC = () => {
         // Валидация формы
         // value - содержит поля формы
         const errors = {} as ProfileFormErrors;
-        if (isNotDefinedString(values.name)) {
-          errors.name = 'Обязательное поле'
+        if (isNotDefinedString(values.email)) {
+          errors.email = 'Обязательное поле'
         }
         return errors;
       },

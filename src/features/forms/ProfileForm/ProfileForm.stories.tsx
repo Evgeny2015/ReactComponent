@@ -17,15 +17,15 @@ export default meta;
 
 export const Main: StoryObj<typeof ProfileForm> = {
     render: () => {
-        const [profile, setProfile] = useState({ name: '', about: '' })
+        const [profile, setProfile] = useState({ email: '', signUpDate: '' })
 
         const { onSubmit, validate, initialValues } = useMemo<
             Pick<FormikConfig<ProfileFormValues>, 'onSubmit' | 'validate' | 'initialValues'>
         >(() => {
             return {
                 initialValues: {
-                    name: profile?.name,
-                    about: profile?.about,
+                    email: profile?.email,
+                    signUpDate: profile?.signUpDate,
                 },
                 onSubmit: (values, { setErrors }) => {
                     try {
@@ -42,8 +42,8 @@ export const Main: StoryObj<typeof ProfileForm> = {
                     // Валидация формы
                     // value - содержит поля формы
                     const errors = {} as ProfileFormErrors;
-                    if (isNotDefinedString(values.name)) {
-                        errors.name = 'Обязательное поле'
+                    if (isNotDefinedString(values.email)) {
+                        errors.email = 'Обязательное поле'
                     }
                     return errors;
                 },
