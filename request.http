@@ -1,0 +1,30 @@
+### Register
+POST http://19429ba06ff2.vps.myjino.ru/api/signup HTTP/1.1
+content-type: application/json
+
+{
+    "email": "user1@mail.com",
+    "password": "123123",
+    "commandId": "01984812-d9f2-720b-afe2-39617b164305"
+}
+
+###
+POST http://19429ba06ff2.vps.myjino.ru/api/signin HTTP/1.1
+content-type: application/json
+
+{
+    "email": "user@mail.com",
+    "password": "123123"
+}
+
+### Profile
+GET http://19429ba06ff2.vps.myjino.ru/api/profile  HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1MzU1NzI5MSwiZXhwIjoxNzU0NDIxMjkxfQ.o60e6khgrzAULNMksszhnQVVgVbi3cRUyNZ3V220Gdc
+
+
+###
+PATCH http://19429ba06ff2.vps.myjino.ru/api/profile  HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1MzU1NzI5MSwiZXhwIjoxNzU0NDIxMjkxfQ.o60e6khgrzAULNMksszhnQVVgVbi3cRUyNZ3V220Gdc
+{
+    "name": "new name"
+}

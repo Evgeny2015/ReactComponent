@@ -98,6 +98,6 @@ export const isLongEnough = (word: string, minLength: number = MIN_LENGTH_PASSWO
   word?.length >= minLength;
 
 export const isNotValidEmail = (email: string): boolean => {
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Z]{2,}$/;
     return regex.test(email);
 }

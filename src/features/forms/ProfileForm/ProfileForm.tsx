@@ -13,19 +13,19 @@ const ProfileForm = memo<ProfileFormProps>(
           autoFocusElement={autoFocusElement}
           onBlur={handleBlur}
           onChange={handleChange}
-          value={values.name}
-          errors={errors.name}
+          value={values.email}
+          errors={errors.email}
           submitCount={submitCount}
-          touched={touched.name}
+          touched={touched.email}
           disabled={disabled}
         />
         <AboutField
           onBlur={handleBlur}
           onChange={handleChange}
-          value={values.about}
-          errors={errors.about}
+          value={values.signUpDate}
+          errors={errors.signUpDate}
           submitCount={submitCount}
-          touched={touched.about}
+          touched={touched.signUpDate}
           disabled={disabled}
         />
       </form>

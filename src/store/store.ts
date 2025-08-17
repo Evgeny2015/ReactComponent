@@ -3,6 +3,9 @@ import { app } from './app';
 import { token } from './token';
 import { profile } from './profile';
 import { basket } from './basket';
+import { authApi } from 'src/services/AuthService/AuthRtkService';
+import { setupListeners } from '@reduxjs/toolkit/query';
+
 
 export const rtkStore = configureStore({
   reducer: {
@@ -10,8 +13,13 @@ export const rtkStore = configureStore({
     basket,
     profile,
     token,
+    [authApi.reducerPath]: authApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+  getDefaultMiddleware().concat(authApi.middleware),
 });
+
+setupListeners(rtkStore.dispatch)
 
 export type RtkState = ReturnType<typeof rtkStore.getState>;
 export type RtkDispatch = typeof rtkStore.dispatch;
