@@ -1,5 +1,5 @@
 import React, { FC, useMemo, useState } from "react"
-import { Button } from "antd"
+import { Alert, Button } from "antd"
 import { useNavigate } from "react-router";
 import { FormikConfig, useFormik } from "formik"
 
@@ -11,7 +11,7 @@ import './AuthPage.css'
 import { AuthData } from "src/models/auth";
 
 const AuthPage: FC = () => {
-    const { currentUser, login } = useAuth()
+    const { currentUser, login, errors } = useAuth()
     const [auth, setAuth] = useState<AuthData>({ email: currentUser, password: '' })
     const navigate = useNavigate()
 
@@ -65,6 +65,9 @@ const AuthPage: FC = () => {
     return (
         <div className="auth">
             <AuthForm formManager={formManager} />
+            {(errors.length > 0) &&
+                <Alert message={errors} type="error" style={{marginBottom: 20}} />
+            }
             <div>
                 <Button type="primary" onClick={submitForm}>
                     Вход

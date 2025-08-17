@@ -7,8 +7,11 @@ import { tokenSelectors, tokenThunks } from "../../store/token"
 import { useProfile, useSignIn, useSignUp } from "../../services/AuthService/AuthService"
 import { COMMAND_ID } from "src/services/AuthService/AuthConfig"
 import { AuthSuccess } from "src/services/AuthService/AuthSuccess"
-import { AuthError } from "src/services/AuthService/AuthError"
+import { AuthError, ErrorResponse } from "src/services/AuthService/AuthError"
 import { useRtkGetProfileMutation, useRtkSignInMutation, useRtkSignUpMutation } from "src/services/AuthService/AuthRtkService"
+import { INCORRECT_EMAIL_OR_PASSWORD } from "src/services/AuthService/ErrorCodes"
+import { LanguageContext, Languages } from "../lang-provider/lang-provider"
+import { useTranslation } from "react-i18next"
 
 export type UserRole = "user" | "admin"
 
@@ -53,55 +56,52 @@ let handleOnSuccess: () => void
  */
 export const AuthProvider = ({ children }: AuthProviderProps) => {
     const authenticated = useSelector(tokenSelectors.authenticated)
-    const token = useSelector(tokenSelectors.get)
     const [currentUser, setCurrentUser] = useState<AuthData['email'] | null>(null);
     const dispatch: RtkDispatch = useDispatch()
     const [roles, setRoles] = useState<UserRole[]>([])
     const [errors, setErrors] = useState<string[]>([])
+    const { language } = useContext(LanguageContext);
+    const { t } = useTranslation();
+    const token = useSelector(tokenSelectors.get)
 
-    const handleSignIn = (response: AuthSuccess | AuthError) => {
-        if ('errors' in response)
+    const handleAuthError = (response: ErrorResponse) => {
+
+        if (response.data.errors
+                .map(x => x.extensions.code)
+                .find(x => x === INCORRECT_EMAIL_OR_PASSWORD))
         {
-            setErrors(response.errors.map(x => x.message))
+            if (language === 'ru')
+                setErrors([t(INCORRECT_EMAIL_OR_PASSWORD)])
+            return
         }
-        else {
-            setErrors([])
-            // получаем и проверяем токен
-            if (response.profile.commandId !== COMMAND_ID)
-            {
-                console.error('wrong command!')
-                return
-            }
 
-            // если токен верный, сохраняем токен, генерируем профиль,
-            // сохраняем email как имя пользователя, добавляем группу
-            dispatch(tokenThunks.setToken(response.token))
-            handleProfile(response.profile)
-        }
+        setErrors(response.data.errors.map(x => x.message))
     }
 
-    const handleSignUp = (response: AuthSuccess | AuthError) => {
-        if ('errors' in response)
+    const handleSignIn = (response: AuthSuccess) => {
+        setErrors([])
+        // получаем и проверяем токен
+        if (response.profile.commandId !== COMMAND_ID)
         {
-            setErrors(response.errors.map(x => x.message))
-            return false
+            console.error('wrong command!')
+            return
         }
-        else {
-            setErrors([])
-            handleOnSuccess()
-            return true
-        }
+
+        // если токен верный, сохраняем токен, генерируем профиль,
+        // сохраняем email как имя пользователя, добавляем группу
+        dispatch(tokenThunks.setToken(response.token))
+        handleProfile(response.profile)
     }
 
-    const handleGetProfile = (response: AuthProfile | AuthError) => {
-        if ('errors' in response)
-        {
-            setErrors(response.errors.map(x => x.message))
-        }
-        else {
-            setErrors([])
-            handleProfile(response)
-        }
+    const handleSignUp = (response: AuthSuccess) => {
+        setErrors([])
+        handleOnSuccess()
+        return true
+    }
+
+    const handleGetProfile = (response: AuthProfile) => {
+        setErrors([])
+        handleProfile(response)
     }
 
     const signIn = useSignIn(handleSignIn)
@@ -124,9 +124,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         // signIn.mutate(auth)
 
         // Redux-toolkit-query
-        rtkSignIn(auth).then((x) => {
-            handleSignIn(x.data)
-        })
+        rtkSignIn(auth)
+            .then((x) => {
+                if (!!x.data)
+                    handleSignIn(x.data)
+                else
+                    handleAuthError(x.error as ErrorResponse)
+            })
+            .catch((x) => console.error(x))
 
         return true
     }
@@ -143,17 +148,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         // signUp.mutate(auth)
 
         // Redux-toolkit-query
-        rtkSignUp(auth).then((x) => {
-            if ('error' in x) {
-                if ('data' in x.error) {
-                    handleSignUp(x.error?.data as AuthError)
+        rtkSignUp(auth)
+            .then((x) => {
+                if (!!x.data) {
+                    if (handleSignUp(x.data))
+                        handleOnSuccess()
                 }
-            }
-            else {
-                if (handleSignUp(x.data))
-                    handleOnSuccess()
-            }
-        })
+                else
+                    handleAuthError(x.error as ErrorResponse)
+            })
+            .catch((x) => console.error(x))
     }
 
     const handleProfile = (profile: AuthProfile) => {
