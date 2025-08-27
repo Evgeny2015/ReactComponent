@@ -18,15 +18,15 @@ root.render(
   <React.StrictMode>
     <Provider store={rtkStore}>
       <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <BrowserRouter>
-            <ThemeProvider>
-              <LanguageProvider>
-                <App />
-              </LanguageProvider>
-            </ThemeProvider>
-          </BrowserRouter>
-        </AuthProvider>
+        <LanguageProvider>
+          <AuthProvider>
+            <BrowserRouter>
+              <ThemeProvider>
+                  <App />
+              </ThemeProvider>
+            </BrowserRouter>
+          </AuthProvider>
+        </LanguageProvider>
       </QueryClientProvider>
     </Provider>
   </React.StrictMode>

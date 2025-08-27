@@ -2,7 +2,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { BACK_URI, COMMAND_ID } from './AuthConfig'
 import { AuthData } from 'src/models/auth'
 import { AuthSuccess } from './AuthSuccess'
-import { AuthError } from './AuthError'
 import { RtkState } from 'src/store/store'
 
 export const authApi = createApi({
@@ -19,10 +18,10 @@ export const authApi = createApi({
         },
     }),
     endpoints: (builder) => ({
-        rtkGetProfile: builder.mutation<AuthProfile | AuthError, void>({
+        rtkGetProfile: builder.mutation<AuthProfile, void>({
             query: () => '/profile',
         }),
-        rtkSignIn: builder.mutation<AuthSuccess | AuthError, AuthData>({
+        rtkSignIn: builder.mutation<AuthSuccess, AuthData>({
             query: (auth: AuthData) => ({
                 url: '/signin',
                 method: 'POST',
