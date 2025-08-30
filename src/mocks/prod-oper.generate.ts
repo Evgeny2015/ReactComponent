@@ -38,12 +38,21 @@ export const generateLongProduct = (): Product & { id: string } => {
     const index = (100 * Math.random()).toFixed(0)
 
     return {
-        description: `Описание  ${index}`,
-        category: `Категория  ${index}`,
+        desc: `Описание  ${index}`,
+        category: {
+            name: `Категория  ${index}`,
+            id: '',
+            createdAt: undefined,
+            updatedAt: undefined,
+            commandId: ''
+        },
         id: uuid(),
         image: '',
         name: `Название  ${index}`,
         price: Math.round(1e4 * Math.random()) / 1e2,
+        createdAt: undefined,
+        updatedAt: undefined,
+        commandId: undefined
     }
 }
 

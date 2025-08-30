@@ -7,9 +7,10 @@ import ProfileForm from "src/features/forms/ProfileForm/ProfileForm"
 import { ProfileFormErrors, ProfileFormValues } from "src/features/forms/ProfileForm/types";
 import { isNotDefinedString } from "src/utils/validation";
 import './ProfilePage.css'
+import { Profile } from "src/models/profile";
 
 const ProfilePage: FC = () => {
-  const [profile, setProfile] = useState({ email: '', signUpDate: '' })
+  const [profile, setProfile] = useState<Profile>()
   const navigate = useNavigate()
 
   const { onSubmit, validate, initialValues } = useMemo<
@@ -17,8 +18,11 @@ const ProfilePage: FC = () => {
   >(() => {
     return {
       initialValues: {
-        email: profile?.email,
-        signUpDate: profile?.signUpDate,
+        id: profile.id,
+        name: profile.name,
+        email: profile.email,
+        signUpDate: profile.signUpDate,
+        commandId: profile.commandId
       },
       onSubmit: (values, { setErrors }) => {
         try {

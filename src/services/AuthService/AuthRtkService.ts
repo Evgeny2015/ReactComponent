@@ -3,6 +3,7 @@ import { BACK_URI, COMMAND_ID } from './AuthConfig'
 import { AuthData } from 'src/models/auth'
 import { AuthSuccess } from './AuthSuccess'
 import { RtkState } from 'src/store/store'
+import { Profile } from 'src/models/profile'
 
 export const authApi = createApi({
     reducerPath: 'auth',
@@ -18,7 +19,7 @@ export const authApi = createApi({
         },
     }),
     endpoints: (builder) => ({
-        rtkGetProfile: builder.mutation<AuthProfile, void>({
+        rtkGetProfile: builder.mutation<Profile, void>({
             query: () => '/profile',
         }),
         rtkSignIn: builder.mutation<AuthSuccess, AuthData>({

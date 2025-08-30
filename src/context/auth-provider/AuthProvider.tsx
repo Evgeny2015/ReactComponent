@@ -1,7 +1,7 @@
 import React, { createContext, Profiler, ReactNode, useContext, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AuthData } from "../../models/auth"
-import { profileActions } from "../../store/profile"
+import { profileActions } from "../../store/StoreProfile"
 import { RtkDispatch } from "../../store/store"
 import { tokenSelectors, tokenThunks } from "../../store/token"
 import { useProfile, useSignIn, useSignUp } from "../../services/AuthService/AuthService"
@@ -12,6 +12,7 @@ import { useRtkGetProfileMutation, useRtkSignInMutation, useRtkSignUpMutation } 
 import { INCORRECT_EMAIL_OR_PASSWORD } from "src/services/AuthService/ErrorCodes"
 import { LanguageContext, Languages } from "../lang-provider/lang-provider"
 import { useTranslation } from "react-i18next"
+import { Profile } from "src/models/profile"
 
 export type UserRole = "user" | "admin"
 
@@ -99,7 +100,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         return true
     }
 
-    const handleGetProfile = (response: AuthProfile) => {
+    const handleGetProfile = (response: Profile) => {
         setErrors([])
         handleProfile(response)
     }
@@ -160,14 +161,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             .catch((x) => console.error(x))
     }
 
-    const handleProfile = (profile: AuthProfile) => {
+    const handleProfile = (profile: Profile) => {
         setCurrentUser(profile.email)
 
-        dispatch(profileActions.set({
-            email: profile.email,
-            signUpDate: profile.signUpDate
-            }
-        ))
+        dispatch(profileActions.set(profile))
 
         setRoles(['admin'])
     }
@@ -185,7 +182,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
                 // Redux-toolkit-query
                 rtkGetProfile().then((x) => {
-                    console.debug(x)
+                    console.debug('rtkGetProfile', x)
                     if ('signUpDate' in x.data)
                         handleProfile(x.data)
                 })

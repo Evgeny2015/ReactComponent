@@ -94,8 +94,8 @@ const ProductPage: FC = () => {
 
   // редактируем товар
   const handleEditProduct = (product: Product) => {
-    const { price, name, description} = product
-    editProduct = { price, name, description }
+    const { price, name, desc } = product
+    editProduct = { price, name, description: desc }
     // setEditVisible(true)
   }
 
@@ -105,12 +105,7 @@ const ProductPage: FC = () => {
         {product.map(x => (
           <LongProduct
             key={x.id}
-            id={x.id}
-            category={x.category}
-            description={x.description}
-            image={x.image}
-            name={x.name}
-            price={x.price}
+            product={x}
             onAddToBasket={handleAddToBasket}
             onEditProduct={handleEditProduct}
           />

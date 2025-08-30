@@ -9,7 +9,7 @@ const meta: Meta<typeof LongProduct> = {
     title: 'Components/LongProduct',
     component: LongProduct,
     argTypes: {
-        price: { control: { type: 'number' } },
+        // product: { control: { type: 'number' } },
     }
 }
 
@@ -21,10 +21,16 @@ export const Main: StoryObj<typeof LongProduct> = {
             <LongProduct {...args} />
         </AuthProvider>,
     args: {
-        price: 100,
-        category: "категория",
-        name: "товар",
-        description: "описание товара",
-        image: imageFile
+        product: {
+            id: '',
+            price: 100,
+            category: { id: '', name: 'категория', createdAt: new Date(), updatedAt: new Date(), commandId: '' },
+            name: "товар",
+            desc: "описание товара",
+            image: imageFile,
+            commandId: '',
+            createdAt: undefined,
+            updatedAt: undefined
+        }
     }
 };

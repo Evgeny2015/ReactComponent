@@ -17,15 +17,17 @@ export default meta;
 
 export const Main: StoryObj<typeof ProfileForm> = {
     render: () => {
-        const [profile, setProfile] = useState({ email: '', signUpDate: '' })
+        const [profile, setProfile] = useState({ id: '',  email: '', signUpDate: '', commandId: '' })
 
         const { onSubmit, validate, initialValues } = useMemo<
             Pick<FormikConfig<ProfileFormValues>, 'onSubmit' | 'validate' | 'initialValues'>
         >(() => {
             return {
                 initialValues: {
-                    email: profile?.email,
-                    signUpDate: profile?.signUpDate,
+                    id: profile.id,
+                    email: profile.email,
+                    signUpDate: profile.signUpDate,
+                    commandId: profile.commandId
                 },
                 onSubmit: (values, { setErrors }) => {
                     try {

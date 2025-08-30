@@ -1,7 +1,7 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import { app } from './app';
 import { token } from './token';
-import { profile } from './profile';
+import { profile } from './StoreProfile';
 import { basket } from './basket';
 import { authApi } from 'src/services/AuthService/AuthRtkService';
 import { setupListeners } from '@reduxjs/toolkit/query';

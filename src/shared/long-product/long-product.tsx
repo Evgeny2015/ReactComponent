@@ -7,7 +7,8 @@ import { Product } from '../../models/product';
 
 import { Button } from 'antd';
 
-export interface LongProductProps extends Product {
+export interface LongProductProps {
+    product: Product
     onAddToBasket?: (product: Product) => void
     onEditProduct?: (product: Product) => void
 };
@@ -15,32 +16,30 @@ export interface LongProductProps extends Product {
 /**
  * Компонент полного отображения товара
  */
-const LongProduct: FC<LongProductProps> = ({ id, price, category, image, name, description, onAddToBasket, onEditProduct }) => {
+const LongProduct: FC<LongProductProps> = ({ product, onAddToBasket, onEditProduct }) => {
     const { isAdmin } = useAuth()
 
     const handleAddToBasket = () => {
-        const product: Product = { id, price, category, image, name, description }
         onAddToBasket(product)
     }
 
     const handleEditProduct = () => {
-        const product: Product = { id, price, category, image, name, description }
         onEditProduct(product)
     }
 
     return (
         <div className={cn('long-product')}>
             <div className={cn('image')}>
-                <img src={image} alt="image" />
+                <img src={product.image} alt="image" />
             </div>
             <div className={cn('product')}>
-                <div className={cn('category')}>{category}</div>
-                <div className={cn('long-string', 'name')}>{name}</div>
-                <div className={cn('long-string', 'desc')}>{description}</div>
+                <div className={cn('category')}>{product.category.name}</div>
+                <div className={cn('long-string', 'name')}>{product.name}</div>
+                <div className={cn('long-string', 'desc')}>{product.desc}</div>
             </div>
 
             <div className={cn('basket')}>
-                <div className={cn('price')}>{price}</div>
+                <div className={cn('price')}>{product.price}</div>
                 <AddToBasketButton count={0} onClick={handleAddToBasket}>Добавить</AddToBasketButton>
                 { isAdmin() &&
                     <Button onClick={handleEditProduct}>Ред-ть</Button>
