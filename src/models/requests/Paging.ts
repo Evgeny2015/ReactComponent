@@ -1,5 +1,4 @@
-export type Pagination = {
+export type Paging = {
   pageSize: number;
   pageNumber: number;
-  total: number;
 };

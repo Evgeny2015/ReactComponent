@@ -182,7 +182,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
                 // Redux-toolkit-query
                 rtkGetProfile().then((x) => {
-                    console.debug('rtkGetProfile', x)
+                    // console.debug('rtkGetProfile', x)
                     if ('signUpDate' in x.data)
                         handleProfile(x.data)
                 })

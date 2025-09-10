@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 import { IShortOperationWithId, IShortProductWithId } from "src/shared/prod-oper-list/prod-oper-list"
-import { Product } from 'src/models/product'
+import { Product } from 'src/models/product/product'
 
 // Генерация случайной операции
 export const generateOperation = (): IShortOperationWithId => {
@@ -47,7 +47,7 @@ export const generateLongProduct = (): Product & { id: string } => {
             commandId: ''
         },
         id: uuid(),
-        image: '',
+        photo: '',
         name: `Название  ${index}`,
         price: Math.round(1e4 * Math.random()) / 1e2,
         createdAt: undefined,

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Meta, StoryObj } from '@storybook/react'
-import ProductForm, { IProduct } from './ProductForm'
+import ProductForm from './ProductForm'
+import { ProductEditModel } from 'src/models/product/editProduct';
 
 const meta: Meta<typeof ProductForm> = {
     title: 'Components/ProductForm',
@@ -15,7 +16,7 @@ const handleCancel = () => {
     console.debug("cancel")
 }
 
-const handleSubmit = (data: IProduct) => {
+const handleSubmit = (data: ProductEditModel) => {
     console.debug(data)
 }
 
@@ -23,7 +24,7 @@ export const Main: StoryObj<typeof ProductForm> = {
     render: () => {
 
         return (
-            <ProductForm onCancel={handleCancel} onSubmit={handleSubmit}/>
+            <ProductForm onSubmit={handleSubmit}/>
         )
     }
 }

@@ -1,5 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
-import ReactDOM from 'react-dom'
+import React, { FC } from 'react'
 import cn from 'clsx'
 import './modal-window.css'
 
@@ -12,8 +11,7 @@ export interface ModalWindowProps {
  */
 const ModalWindow: FC<ModalWindowProps> = ({ children }) => {
     return (
-        <div className={cn('modalwindow-background')}
-        >
+        <div className={cn('modalwindow-background')}>
             <div className={cn('modalwindow-container')}>
                 <div className={cn('body')}>
                     {children}

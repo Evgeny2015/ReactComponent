@@ -27,7 +27,7 @@ export const Main: StoryObj<typeof LongProduct> = {
             category: { id: '', name: 'категория', createdAt: new Date(), updatedAt: new Date(), commandId: '' },
             name: "товар",
             desc: "описание товара",
-            image: imageFile,
+            photo: imageFile,
             commandId: '',
             createdAt: undefined,
             updatedAt: undefined

@@ -1,7 +1,7 @@
 .long-product {
     display: flex;
     justify-content: space-between;
-    width: 410px;
+    width: 610px;
     border: 1px solid rgb(207, 202, 202);
     border-radius: 3px;
     padding: 5px;
@@ -24,7 +24,7 @@
     flex-direction: column;
     flex-wrap: nowrap;
     padding: 2px;
-    width: 170px;
+    width: 190px;
 }
 
 .long-product .category {

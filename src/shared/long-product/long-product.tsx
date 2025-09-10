@@ -3,7 +3,7 @@ import cn from 'clsx';
 import './long-product.css';
 import AddToBasketButton from '../add-to-basket-button/add-to-basket-button';
 import { useAuth } from '../../context/auth-provider/AuthProvider';
-import { Product } from '../../models/product';
+import { Product } from '../../models/product/product';
 
 import { Button } from 'antd';
 
@@ -30,17 +30,17 @@ const LongProduct: FC<LongProductProps> = ({ product, onAddToBasket, onEditProdu
     return (
         <div className={cn('long-product')}>
             <div className={cn('image')}>
-                <img src={product.image} alt="image" />
+                <img src={product.photo} alt="image" />
             </div>
             <div className={cn('product')}>
-                <div className={cn('category')}>{product.category.name}</div>
+                {/* <div className={cn('category')}>{product.category.name}</div> */}
                 <div className={cn('long-string', 'name')}>{product.name}</div>
                 <div className={cn('long-string', 'desc')}>{product.desc}</div>
             </div>
 
             <div className={cn('basket')}>
                 <div className={cn('price')}>{product.price}</div>
-                <AddToBasketButton count={0} onClick={handleAddToBasket}>Добавить</AddToBasketButton>
+                <AddToBasketButton count={0} onClick={handleAddToBasket}>В корзину</AddToBasketButton>
                 { isAdmin() &&
                     <Button onClick={handleEditProduct}>Ред-ть</Button>
                 }

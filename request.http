@@ -59,26 +59,133 @@ content-type: application/json
 
 
 ###
-### Категории
+### Категории все
 GET {{protocol}}://{{host}}/api/categories
 
-###
+### Категории команды
+GET {{protocol}}://{{host}}/api/categories
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1NzE4MjMzMiwiZXhwIjoxNzU4MDQ2MzMyfQ.qHiXGpOZPHovZpX93H02oM__A_LKlqQ2_wDuZW_wmzY
+
+### Новая категоря
+POST  {{protocol}}://{{host}}/api/categories
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1NzE4MjMzMiwiZXhwIjoxNzU4MDQ2MzMyfQ.qHiXGpOZPHovZpX93H02oM__A_LKlqQ2_wDuZW_wmzY
+content-type: application/json
+
+{
+    "name": "Category 1"
+}
+
+### Обновление категории
+PUT  {{protocol}}://{{host}}/api/categories/68bc7b588e877ac8a9c6a82c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1NzE4MjMzMiwiZXhwIjoxNzU4MDQ2MzMyfQ.qHiXGpOZPHovZpX93H02oM__A_LKlqQ2_wDuZW_wmzY
+content-type: application/json
+
+{
+    "name": "Category 2"
+}
+
+### удаление категории
+DELETE  {{protocol}}://{{host}}/api/categories/68bc7b588e877ac8a9c6a82c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1NzE4MjMzMiwiZXhwIjoxNzU4MDQ2MzMyfQ.qHiXGpOZPHovZpX93H02oM__A_LKlqQ2_wDuZW_wmzY
+
+
+### Категория по ID
 GET {{protocol}}://{{host}}/api/categories/651c26138a42911d60f0305d
 
-###
-### Продукты
-GET {{protocol}}://{{host}}/api/products
+
 
 ###
-GET {{protocol}}://{{host}}/api/products/651c272f8a42911d60f03071
+### Продукты все
+GET {{protocol}}://{{host}}/api/products?pagination={"pageSize":2,"pageNumber":1}&sorting={"type":"ASC", "field":"name"}
+
+### Продукты команды
+GET {{protocol}}://{{host}}/api/products?pagination={"pageSize":2,"pageNumber":1}&sorting={"type":"ASC", "field":"name"}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1NzE4MjMzMiwiZXhwIjoxNzU4MDQ2MzMyfQ.qHiXGpOZPHovZpX93H02oM__A_LKlqQ2_wDuZW_wmzY
+
+###
+GET {{protocol}}://{{host}}/api/products/68bc7c208e877ac8a9c6a843
+
+
+### Создание нового продукта
+POST {{protocol}}://{{host}}/api/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1NzE4MjMzMiwiZXhwIjoxNzU4MDQ2MzMyfQ.qHiXGpOZPHovZpX93H02oM__A_LKlqQ2_wDuZW_wmzY
+content-type: application/json
+
+{
+  "name": "111",
+  "price": 100,
+  "categoryId": "68bc7bc78e877ac8a9c6a83e"
+}
+
+### Создание нового продукта ERROR!
+POST {{protocol}}://{{host}}/api/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1NzE4MjMzMiwiZXhwIjoxNzU4MDQ2MzMyfQ.qHiXGpOZPHovZpX93H02oM__A_LKlqQ2_wDuZW_wmzY
+content-type: application/json
+
+{
+  "price": 100,
+  "categoryId": "68bc7bc78e877ac8a9c6a83e"
+}
+
+### Remove product
+DELETE {{protocol}}://{{host}}/api/products/68bc7c208e877ac8a9c6a843
+
+### Update product
+PUT {{protocol}}://{{host}}/api/products/68bc7c208e877ac8a9c6a843
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1NzE4MjMzMiwiZXhwIjoxNzU4MDQ2MzMyfQ.qHiXGpOZPHovZpX93H02oM__A_LKlqQ2_wDuZW_wmzY
+content-type: application/json
+
+{
+  "name": "112",
+  "price": 200,
+  "categoryId": "68bc7bc78e877ac8a9c6a83e"
+}
+
+### Update product for selected fields
+PATCH {{protocol}}://{{host}}/api/products/68bc7c208e877ac8a9c6a843
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1NzE4MjMzMiwiZXhwIjoxNzU4MDQ2MzMyfQ.qHiXGpOZPHovZpX93H02oM__A_LKlqQ2_wDuZW_wmzY
+content-type: application/json
+
+{
+  "price": 300
+}
+
 
 ###
 ### Заказы
+GET {{protocol}}://{{host}}/api/orders?pagination={"pageSize":2,"pageNumber":1}&sorting={"type":"ASC", "field":"createdAt"}
+
+### Заказы команды
 GET {{protocol}}://{{host}}/api/orders
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1NzE4MjMzMiwiZXhwIjoxNzU4MDQ2MzMyfQ.qHiXGpOZPHovZpX93H02oM__A_LKlqQ2_wDuZW_wmzY
 
-###
-GET {{protocol}}://{{host}}/api/orders/651da23a28980e5b9545c310
+### Заказ
+GET {{protocol}}://{{host}}/api/orders/68c185028e877ac8a9c6c03e
 
+### Создает новый заказ
+POST {{protocol}}://{{host}}/api/orders
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1NzE4MjMzMiwiZXhwIjoxNzU4MDQ2MzMyfQ.qHiXGpOZPHovZpX93H02oM__A_LKlqQ2_wDuZW_wmzY
+content-type: application/json
+
+{
+  "products": [{
+    "id": "68bc7c208e877ac8a9c6a843",
+    "quantity": 10
+  }]
+}
+
+### Удаляет заказ
+DELETE {{protocol}}://{{host}}/api/orders/68c1b8da8e877ac8a9c6c123
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1NzE4MjMzMiwiZXhwIjoxNzU4MDQ2MzMyfQ.qHiXGpOZPHovZpX93H02oM__A_LKlqQ2_wDuZW_wmzY
+
+### Обновляет заказ
+PATCH {{protocol}}://{{host}}/api/orders/68c185028e877ac8a9c6c03e
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ODUyNTcyOGU4NzdhYzhhOWM0Y2JkZiIsImlhdCI6MTc1NzE4MjMzMiwiZXhwIjoxNzU4MDQ2MzMyfQ.qHiXGpOZPHovZpX93H02oM__A_LKlqQ2_wDuZW_wmzY
+content-type: application/json
+
+{
+  "status": "processing"
+}
 
 ###
 ### Операции

@@ -4,10 +4,9 @@ export type Product = {
     commandId: string;
     createdAt: Date;
     desc?: string;          // описание
-    image: string;          // изображение
     name: string;           // название
     oldPrice?: number;
-    photo?: string;
+    photo?: string;         // изображение
     price: number;          // стоимость
     updatedAt: Date;
 }

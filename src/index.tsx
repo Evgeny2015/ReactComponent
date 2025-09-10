@@ -7,15 +7,15 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { rtkStore } from 'src/store/store'
 import { LanguageProvider } from "src/context/lang-provider/lang-provider"
 import { ThemeProvider } from "src/context/theme-provider/theme-provider"
-import App from './app/App';
-import './app/index.css';
+import App from './app/App'
+import './app/index.css'
 import AuthProvider from './context/auth-provider/AuthProvider'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 const queryClient = new QueryClient()
 
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={rtkStore}>
       <QueryClientProvider client={queryClient}>
         <LanguageProvider>
@@ -29,5 +29,5 @@ root.render(
         </LanguageProvider>
       </QueryClientProvider>
     </Provider>
-  </React.StrictMode>
+  // </React.StrictMode>
 )

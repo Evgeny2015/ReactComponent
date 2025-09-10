@@ -5,6 +5,8 @@ import { profile } from './StoreProfile';
 import { basket } from './basket';
 import { authApi } from 'src/services/AuthService/AuthRtkService';
 import { setupListeners } from '@reduxjs/toolkit/query';
+import { productApi } from 'src/services/ProductService/ProductService';
+import { orderApi } from 'src/services/OrderService/OrderService';
 
 
 export const rtkStore = configureStore({
@@ -14,9 +16,14 @@ export const rtkStore = configureStore({
     profile,
     token,
     [authApi.reducerPath]: authApi.reducer,
+    [productApi.reducerPath]: productApi.reducer,
+    [orderApi.reducerPath]: orderApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
-  getDefaultMiddleware().concat(authApi.middleware),
+    getDefaultMiddleware()
+      .concat(authApi.middleware)
+      .concat(productApi.middleware)
+      .concat(orderApi.middleware)
 });
 
 setupListeners(rtkStore.dispatch)

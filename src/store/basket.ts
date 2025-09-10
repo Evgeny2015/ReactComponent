@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Product } from "src/models/product";
+import { Product } from "src/models/product/product";
 import { RtkState } from "./store";
 import { tokenActions } from "./token";
 

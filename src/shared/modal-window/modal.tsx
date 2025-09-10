@@ -1,7 +1,6 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { createPortal } from 'react-dom'
 import ModalWindow, { ModalWindowProps } from './modal-window';
-import { Button } from 'antd';
 
 
 export interface ModalProps extends ModalWindowProps {
@@ -14,9 +13,7 @@ export const Modal: FC<ModalProps> = ({ container = document.body, visible, ...p
     <>
       {visible &&
         createPortal(
-          <>
             <ModalWindow {...props} />
-          </>
           , container)
       }
     </>

@@ -1,23 +1,40 @@
-import React, { FC } from "react"
-import { Button, Form, Input } from 'antd';
+import React, { FC, useEffect, useImperativeHandle } from "react"
+import { Form, Input } from 'antd';
 import { useForm, SubmitHandler, Controller } from "react-hook-form"
 import { FormItem } from '../../../shared/form-item/form-item';
-
-
-export interface IProduct {
-    price: number          // стоимость
-    name: string           // название
-    description: string    // описание
-};
+import { ProductEditModel } from "src/models/product/editProduct";
 
 export interface IProductProps {
-    product?: IProduct
-    onCancel: () => void
-    onSubmit: SubmitHandler<IProduct>
+    product?: ProductEditModel
+    onSubmit: SubmitHandler<ProductEditModel>
+    innerRef?: any
 }
 
-const ProductForm: FC<IProductProps> = ({product, onCancel, onSubmit }) => {
-    const { control, handleSubmit, formState: { errors } } = useForm<IProduct>({defaultValues: product})
+const defaultValues = {
+    name: '',
+    desc: '',
+    price: 0
+}
+
+const ProductForm: FC<IProductProps> = ({ product, onSubmit, innerRef }) => {
+    const { control, handleSubmit, formState: { errors }, reset, trigger } = useForm<ProductEditModel>({ defaultValues })
+
+    useEffect(() => {
+        if (product)
+            reset(product)
+    }, [product])
+
+    useImperativeHandle(innerRef, () => {
+        return { submitForm }
+    }, []);
+
+    const submitForm = async () => {
+        const isValid = await trigger()
+
+        if (isValid) {
+            handleSubmit(onSubmit)()
+        }
+    }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -27,8 +44,9 @@ const ProductForm: FC<IProductProps> = ({product, onCancel, onSubmit }) => {
                 rules={{
                     required: "Обязательно для заполнения",
                     minLength: {
-                        value: 10,
-                        message: "Минимальная длина названия - 10 символов" }
+                        value: 5,
+                        message: "Минимальная длина названия - 5 символов"
+                    }
                 }}
                 render={({ field }) => (
                     <Form.Item>
@@ -44,7 +62,7 @@ const ProductForm: FC<IProductProps> = ({product, onCancel, onSubmit }) => {
             />
 
             <Controller
-                name="description"
+                name='desc'
                 control={control}
                 rules={{
                     required: "Обязательно для заполнения",
@@ -57,8 +75,8 @@ const ProductForm: FC<IProductProps> = ({product, onCancel, onSubmit }) => {
                     <Form.Item>
                         <FormItem
                             title="Описание"
-                            validateStatus={errors && errors["description"] ? "error" : ""}
-                            help={errors.description?.message}
+                            validateStatus={errors && errors['desc'] ? "error" : ""}
+                            help={errors.desc?.message}
                         >
                             <Input {...field} />
                         </FormItem>
@@ -82,9 +100,6 @@ const ProductForm: FC<IProductProps> = ({product, onCancel, onSubmit }) => {
                     </Form.Item>
                 )}
             />
-
-            <Button htmlType="submit" type="primary">Сохранить</Button>
-            <Button onClick={onCancel}>Отмена</Button>
         </form>
     )
 }
