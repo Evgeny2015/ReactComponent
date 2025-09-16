@@ -19,6 +19,6 @@ export const Main: StoryObj<typeof BasketProduct> = {
     args: {
         price: 100,
         name: "товар",
-        image: imageFile
+        photo: imageFile
     }
 };

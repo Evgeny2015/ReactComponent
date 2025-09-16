@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "react-query"
 import { AuthData } from "src/models/auth";
 import { BACK_URI, COMMAND_ID } from "./AuthConfig";
 import { AuthSuccess } from "./AuthSuccess";
+import { Profile } from "src/models/profile";
 
 
 export const useSignIn = (onSuccess: (response: AuthSuccess) => void) => {
@@ -52,7 +53,7 @@ export const useSignUp = (onSuccess: (response: AuthSuccess) => void) => {
   })
 }
 
-export const useProfile = (onSuccess: (response: AuthProfile) => void) => {
+export const useProfile = (onSuccess: (response: Profile) => void) => {
   const queryClient = useQueryClient();
 
   return useMutation({

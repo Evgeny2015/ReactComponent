@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react"
 import { NavLink, Outlet, useLocation } from "react-router"
 import { Layout as ALayout, Menu } from 'antd'
-import { ProductOutlined, ShoppingCartOutlined, ProfileOutlined, LoginOutlined, VerticalAlignTopOutlined } from '@ant-design/icons'
+import { ProductOutlined, ShoppingCartOutlined, OrderedListOutlined, ProfileOutlined, LoginOutlined, VerticalAlignTopOutlined } from '@ant-design/icons'
 import { MenuItemType } from "antd/es/menu/interface"
 import LanguageToggle from "src/shared/lang-toggle/lang-toggle"
 import ThemeToggle from "src/shared/theme-toggle/theme-toggle"
@@ -40,10 +40,11 @@ const CreateRouteMenuItem = (id: number, title: string, path: string, icon: type
 const menuItems: RouteMenuItem[] = [
     CreateRouteMenuItem(1, 'Каталог', "/prod", ProductOutlined, "auth"),
     CreateRouteMenuItem(2, 'Корзина', "/basket", ShoppingCartOutlined, "auth"),
-    CreateRouteMenuItem(3, 'Профиль', "/profile", ProfileOutlined, "auth", "admin"),
-    CreateRouteMenuItem(4, 'Вход', "/auth", LoginOutlined, "notauth"),
-    CreateRouteMenuItem(5, 'Регистрация', "/register", VerticalAlignTopOutlined, "notauth"),
-    CreateRouteMenuItem(6, 'Выход', "/logout", LoginOutlined, "auth"),
+    CreateRouteMenuItem(3, 'Заказы', "/order", OrderedListOutlined, "auth"),
+    CreateRouteMenuItem(4, 'Профиль', "/profile", ProfileOutlined, "auth", "admin"),
+    CreateRouteMenuItem(5, 'Вход', "/auth", LoginOutlined, "notauth"),
+    CreateRouteMenuItem(6, 'Регистрация', "/register", VerticalAlignTopOutlined, "notauth"),
+    CreateRouteMenuItem(7, 'Выход', "/logout", LoginOutlined, "auth"),
 ]
 
 const handleDefaultSelectedKeys = (): string[] => {
